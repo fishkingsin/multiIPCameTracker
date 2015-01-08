@@ -26,3 +26,8 @@
 *.exe
 *.out
 *.app
+
+.DS_Store
+
+*.app
+bin/multiIPCameTrackerDebug.app
