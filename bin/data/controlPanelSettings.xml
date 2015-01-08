@@ -1,0 +1,276 @@
+<GRAB_BACKGROUND>
+    <val_0>0.000000</val_0>
+</GRAB_BACKGROUND>
+<BG_THRESHOLD>
+    <val_0>15.111112</val_0>
+</BG_THRESHOLD>
+<DIFF_MODE>
+    <val_0>0.000000</val_0>
+</DIFF_MODE>
+<MOTION_THRESHOLD>
+    <val_0>19.344446</val_0>
+</MOTION_THRESHOLD>
+<MOTION_FADE>
+    <val_0>0.783333</val_0>
+</MOTION_FADE>
+<FIELD_DRAW_SCALE>
+    <val_0>2.500000</val_0>
+</FIELD_DRAW_SCALE>
+<IP_CAM_RECT_0_POS_X>
+    <val_0>0.000000000</val_0>
+</IP_CAM_RECT_0_POS_X>
+<IP_CAM_RECT_0_POS_Y>
+    <val_0>0.000000000</val_0>
+</IP_CAM_RECT_0_POS_Y>
+<IP_CAM_RECT_0_WIDTH>
+    <val_0>320.000000000</val_0>
+</IP_CAM_RECT_0_WIDTH>
+<IP_CAM_RECT_0_HEIGHT>
+    <val_0>240.000000000</val_0>
+</IP_CAM_RECT_0_HEIGHT>
+<IP_CAM_RECT_1_POS_X>
+    <val_0>0.000000000</val_0>
+</IP_CAM_RECT_1_POS_X>
+<IP_CAM_RECT_1_POS_Y>
+    <val_0>0.000000000</val_0>
+</IP_CAM_RECT_1_POS_Y>
+<IP_CAM_RECT_1_WIDTH>
+    <val_0>320.000000000</val_0>
+</IP_CAM_RECT_1_WIDTH>
+<IP_CAM_RECT_1_HEIGHT>
+    <val_0>240.000000000</val_0>
+</IP_CAM_RECT_1_HEIGHT>
+<IP_CAM_RECT_2_POS_X>
+    <val_0>0.000000000</val_0>
+</IP_CAM_RECT_2_POS_X>
+<IP_CAM_RECT_2_POS_Y>
+    <val_0>0.000000000</val_0>
+</IP_CAM_RECT_2_POS_Y>
+<IP_CAM_RECT_2_WIDTH>
+    <val_0>320.000000000</val_0>
+</IP_CAM_RECT_2_WIDTH>
+<IP_CAM_RECT_2_HEIGHT>
+    <val_0>240.000000000</val_0>
+</IP_CAM_RECT_2_HEIGHT>
+<IP_CAM_RECT_3_POS_X>
+    <val_0>0.000000000</val_0>
+</IP_CAM_RECT_3_POS_X>
+<IP_CAM_RECT_3_POS_Y>
+    <val_0>0.000000000</val_0>
+</IP_CAM_RECT_3_POS_Y>
+<IP_CAM_RECT_3_WIDTH>
+    <val_0>320.000000000</val_0>
+</IP_CAM_RECT_3_WIDTH>
+<IP_CAM_RECT_3_HEIGHT>
+    <val_0>240.000000000</val_0>
+</IP_CAM_RECT_3_HEIGHT>
+<ipCamRectControl0>
+    <0X>
+    <val_0>6.15384</val_0>
+    <0X>
+    <val_0>153.846</val_0>
+</ipCamRectControl0>
+<CAM_RECT_0>
+    <CAM_RECT_X_0>
+        <val_0>0</val_0>
+    </CAM_RECT_X_0>
+    <CAM_RECT_Y_0>
+        <val_0>0</val_0>
+    </CAM_RECT_Y_0>
+    <CAM_RECT_W_0>
+        <val_0>73.8462</val_0>
+    </CAM_RECT_W_0>
+    <CAM_RECT_H_0>
+        <val_0>240</val_0>
+    </CAM_RECT_H_0>
+</CAM_RECT_0>
+<CAM_RECT_1>
+    <CAM_RECT_X_1>
+        <val_0>73.8462</val_0>
+    </CAM_RECT_X_1>
+    <CAM_RECT_Y_1>
+        <val_0>0</val_0>
+    </CAM_RECT_Y_1>
+    <CAM_RECT_W_1>
+        <val_0>80</val_0>
+    </CAM_RECT_W_1>
+    <CAM_RECT_H_1>
+        <val_0>240</val_0>
+    </CAM_RECT_H_1>
+</CAM_RECT_1>
+<CAM_RECT_2>
+    <CAM_RECT_X_2>
+        <val_0>153.846</val_0>
+    </CAM_RECT_X_2>
+    <CAM_RECT_Y_2>
+        <val_0>0</val_0>
+    </CAM_RECT_Y_2>
+    <CAM_RECT_W_2>
+        <val_0>86.1539</val_0>
+    </CAM_RECT_W_2>
+    <CAM_RECT_H_2>
+        <val_0>240</val_0>
+    </CAM_RECT_H_2>
+</CAM_RECT_2>
+<CAM_RECT_3>
+    <CAM_RECT_X_3>
+        <val_0>240</val_0>
+    </CAM_RECT_X_3>
+    <CAM_RECT_Y_3>
+        <val_0>0</val_0>
+    </CAM_RECT_Y_3>
+    <CAM_RECT_W_3>
+        <val_0>80</val_0>
+    </CAM_RECT_W_3>
+    <CAM_RECT_H_3>
+        <val_0>240</val_0>
+    </CAM_RECT_H_3>
+</CAM_RECT_3>
+<BLEND_CONTORL_0>
+    <ALPHA_LEFT_0>
+        <val_0>1</val_0>
+    </ALPHA_LEFT_0>
+    <ALPHA_RIGHT_0>
+        <val_0>1</val_0>
+    </ALPHA_RIGHT_0>
+    <SIZE_LEFT_0>
+        <val_0>0</val_0>
+    </SIZE_LEFT_0>
+    <SIZE_RIGHT_0>
+        <val_0>0</val_0>
+    </SIZE_RIGHT_0>
+</BLEND_CONTORL_0>
+<BLEND_CONTORL_1>
+    <ALPHA_LEFT_1>
+        <val_0>1</val_0>
+    </ALPHA_LEFT_1>
+    <ALPHA_RIGHT_1>
+        <val_0>1</val_0>
+    </ALPHA_RIGHT_1>
+    <SIZE_LEFT_1>
+        <val_0>0</val_0>
+    </SIZE_LEFT_1>
+    <SIZE_RIGHT_1>
+        <val_0>0</val_0>
+    </SIZE_RIGHT_1>
+</BLEND_CONTORL_1>
+<BLEND_CONTORL_2>
+    <ALPHA_LEFT_2>
+        <val_0>1</val_0>
+    </ALPHA_LEFT_2>
+    <ALPHA_RIGHT_2>
+        <val_0>1</val_0>
+    </ALPHA_RIGHT_2>
+    <SIZE_LEFT_2>
+        <val_0>0</val_0>
+    </SIZE_LEFT_2>
+    <SIZE_RIGHT_2>
+        <val_0>0</val_0>
+    </SIZE_RIGHT_2>
+</BLEND_CONTORL_2>
+<BLEND_CONTORL_3>
+    <ALPHA_LEFT_3>
+        <val_0>1</val_0>
+    </ALPHA_LEFT_3>
+    <ALPHA_RIGHT_3>
+        <val_0>1</val_0>
+    </ALPHA_RIGHT_3>
+    <SIZE_LEFT_3>
+        <val_0>0</val_0>
+    </SIZE_LEFT_3>
+    <SIZE_RIGHT_3>
+        <val_0>0</val_0>
+    </SIZE_RIGHT_3>
+</BLEND_CONTORL_3>
+<UNDISTORT_CONTROL_0>
+    <RADIALDIST_X_0>
+        <val_0>0</val_0>
+    </RADIALDIST_X_0>
+    <RADIALDIST_Y_0>
+        <val_0>-0.184615</val_0>
+    </RADIALDIST_Y_0>
+    <TANGENTDIST_X_0>
+        <val_0>0</val_0>
+    </TANGENTDIST_X_0>
+    <FOCAL_X_0>
+        <val_0>201.846</val_0>
+    </FOCAL_X_0>
+    <FOCAL_Y_0>
+        <val_0>206.769</val_0>
+    </FOCAL_Y_0>
+    <CENTER_X_0>
+        <val_0>182.154</val_0>
+    </CENTER_X_0>
+    <CENTER_Y_0>
+        <val_0>107.077</val_0>
+    </CENTER_Y_0>
+</UNDISTORT_CONTROL_0>
+<UNDISTORT_CONTROL_1>
+    <RADIALDIST_X_1>
+        <val_0>0</val_0>
+    </RADIALDIST_X_1>
+    <RADIALDIST_Y_1>
+        <val_0>0</val_0>
+    </RADIALDIST_Y_1>
+    <TANGENTDIST_X_1>
+        <val_0>0</val_0>
+    </TANGENTDIST_X_1>
+    <FOCAL_X_1>
+        <val_0>157.538</val_0>
+    </FOCAL_X_1>
+    <FOCAL_Y_1>
+        <val_0>117.231</val_0>
+    </FOCAL_Y_1>
+    <CENTER_X_1>
+        <val_0>153.846</val_0>
+    </CENTER_X_1>
+    <CENTER_Y_1>
+        <val_0>116.308</val_0>
+    </CENTER_Y_1>
+</UNDISTORT_CONTROL_1>
+<UNDISTORT_CONTROL_2>
+    <RADIALDIST_X_2>
+        <val_0>0</val_0>
+    </RADIALDIST_X_2>
+    <RADIALDIST_Y_2>
+        <val_0>0</val_0>
+    </RADIALDIST_Y_2>
+    <TANGENTDIST_X_2>
+        <val_0>0</val_0>
+    </TANGENTDIST_X_2>
+    <FOCAL_X_2>
+        <val_0>160</val_0>
+    </FOCAL_X_2>
+    <FOCAL_Y_2>
+        <val_0>120</val_0>
+    </FOCAL_Y_2>
+    <CENTER_X_2>
+        <val_0>157.538</val_0>
+    </CENTER_X_2>
+    <CENTER_Y_2>
+        <val_0>116.308</val_0>
+    </CENTER_Y_2>
+</UNDISTORT_CONTROL_2>
+<UNDISTORT_CONTROL_3>
+    <RADIALDIST_X_3>
+        <val_0>0</val_0>
+    </RADIALDIST_X_3>
+    <RADIALDIST_Y_3>
+        <val_0>0</val_0>
+    </RADIALDIST_Y_3>
+    <TANGENTDIST_X_3>
+        <val_0>0</val_0>
+    </TANGENTDIST_X_3>
+    <FOCAL_X_3>
+        <val_0>157.538</val_0>
+    </FOCAL_X_3>
+    <FOCAL_Y_3>
+        <val_0>118.154</val_0>
+    </FOCAL_Y_3>
+    <CENTER_X_3>
+        <val_0>160</val_0>
+    </CENTER_X_3>
+    <CENTER_Y_3>
+        <val_0>118.154</val_0>
+    </CENTER_Y_3>
+</UNDISTORT_CONTROL_3>
