@@ -1,0 +1,13 @@
+ofxGui
+ofxNetwork
+ofxOpenCv
+ofxOsc
+ofxThreadedImageLoader
+ofxVectorGraphics
+ofxXmlSettings
+ofxAutoReloadedShader
+ofxCv
+ofxIpVideoGrabber
+ofxOpticalFlowLK
+ofxProjectorBlend
+ofxUI
