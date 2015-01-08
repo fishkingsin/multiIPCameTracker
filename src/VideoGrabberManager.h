@@ -13,6 +13,7 @@
 #include "Constants.h"
 #include "ofxXmlSettings.h"
 #include "ofxOpenCv.h"
+#include "ofxAutoReloadedShader.h"
 class IPCameraDef
 {
 public:
@@ -90,10 +91,13 @@ public:
     std::vector< ofPtr<ofParameter<float> > > focalY;
     std::vector< ofPtr<ofParameter<float> > > centerX;
     std::vector< ofPtr<ofParameter<float> > > centerY;
+    std::vector< ofPtr<ofParameter<float> > > BarrelPowers;
     
-    ofShader blendShader;
     
-    std::vector< ofPtr<ofTexture > > textures;
+    ofParameter<bool>enableShader;
+    ofxAutoReloadedShader blendShader;
+    
+//    std::vector< ofPtr<ofTexture > > textures;
     
     int nextCamera;
     ofFbo fbo;

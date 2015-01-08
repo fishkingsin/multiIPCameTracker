@@ -1,19 +1,22 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){\
+void ofApp::setup(){
     ofSetLogLevel(OF_LOG_VERBOSE);
+    ofEnableSmoothing();
+    ofEnableAntiAliasing();
+    ofEnableAlphaBlending();
     videoManager.setup();
     gui.loadFont("MONACO.TTF", 8);
     gui.setup("multiIPCam", 0, 0, ofGetWidth(), ofGetHeight());
+    gui.setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("app info", 4, false);
-    
+
 //    ofxControlPanel::setBackgroundColor(simpleColor(60, 30, 30, 200));
-    gui.addPanel("motion example", 4, false);
-    
+    gui.addPanel("grabber", 4, false);
+//    gui.setBackgroundColor(0, 0, 0, 125);
 //    ofxControlPanel::setBackgroundColor(simpleColor(70, 70, 30, 200));
-    gui.addPanel("third panel", 4, false);
-    
+    gui.addPanel("fbo", 4, false);
 //    ofxControlPanel::setBackgroundColor(simpleColor(30, 30, 30, 200));
     
     //--------- PANEL 1
@@ -43,12 +46,13 @@ void ofApp::setup(){\
     gui.setWhichColumn(0);
     for(int i = 0 ; i < videoManager.ipcamRectControls.size(); i++)
     {
-        gui.addDrawableRect("videos"+ofToString(i), videoManager.textures[i].get() , 160, 120);
+        gui.addDrawableRect("videos"+ofToString(i), videoManager.grabbers[i].get() , ofGetWidth()/4, VIDEO_HEIGHT);
         gui.addGroup(*videoManager.undistortControls[i].get());
     }
     
     gui.setWhichPanel(2);
     gui.setWhichColumn(0);
+    gui.addToggle(videoManager.enableShader.set("ENABLE_SHADER", false));
 
     for(int i = 0 ; i < videoManager.ipcamRectControls.size(); i++)
     {
@@ -136,7 +140,9 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     videoManager.draw();
+    ofPushStyle();
     gui.draw();
+    ofPopStyle();
 }
 
 //--------------------------------------------------------------

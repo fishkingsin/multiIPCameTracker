@@ -9,8 +9,10 @@
 #include "VideoGrabberManager.h"
 void VideoGrabberManager::setup()
 {
-    ofDisableArbTex();
-    blendShader.load("simpleBlend");
+//    ofEnableNormalizedTexCoords();
+//    ofDisableArbTex();
+//    blendShader.load("shaders/SmoothEdgeBlend");
+        blendShader.load("shaders/simpleBlend");
     loadCameras();
     // initialize connection
     for(int i = 0; i < ipcams.size(); i++)
@@ -53,11 +55,13 @@ void VideoGrabberManager::setup()
         ipCamW.push_back(w);
         ipCamH.push_back(h);
         ipcamRectControls.push_back(control);
-        ofPtr<ofTexture> image = ofPtr<ofTexture>(new ofTexture);
-//                cvimage->allocate(VIDEO_WIDTH , VIDEO_HEIGHT);
-        image->allocate(VIDEO_WIDTH , VIDEO_HEIGHT, GL_RGB);
-//        textures->setUseTexture(true);
-        textures.push_back(image);
+//        ofPtr<ofxCvColorImage> cvimage = ofPtr<ofxCvColorImage>(new ofxCvColorImage);
+//        cvimage->allocate(VIDEO_WIDTH , VIDEO_HEIGHT);
+//        cvimage->setUseTexture(true);
+//        cvImages.push_back(cvimage);
+//        image->allocate(VIDEO_WIDTH , VIDEO_HEIGHT, GL_RGB);
+        //        textures->setUseTexture(true);
+//        textures.push_back(image);
         
         
         ofPtr<ofParameterGroup> shaderControl = ofPtr<ofParameterGroup>(new ofParameterGroup);
@@ -91,18 +95,18 @@ void VideoGrabberManager::setup()
         ofPtr<ofParameter<float> >  focaly = ofPtr<ofParameter<float> > (new ofParameter<float>);
         ofPtr<ofParameter<float> >  centerx = ofPtr<ofParameter<float> > (new ofParameter<float>);
         ofPtr<ofParameter<float> >  centery = ofPtr<ofParameter<float> > (new ofParameter<float>);
-        
+        ofPtr<ofParameter<float> >  barrelpower = ofPtr<ofParameter<float> > (new ofParameter<float>);
         
         
         undistortcontrol->add(radialdistX->set("RADIALDIST_X_"+ofToString(i),0,-1,1));
         undistortcontrol->add(radialdistY->set("RADIALDIST_Y_"+ofToString(i),0,-1,1));
         undistortcontrol->add(tangentdistX->set("TANGENTDIST_X_"+ofToString(i),0,-1,1));
-        undistortcontrol->add(tangentdistY->set("TANGENTDIST_X_"+ofToString(i),0,-1,1));
+        undistortcontrol->add(tangentdistY->set("TANGENTDIST_Y_"+ofToString(i),0,-1,1));
         undistortcontrol->add(focalx->set("FOCAL_X_"+ofToString(i),0,-VIDEO_WIDTH*2,VIDEO_WIDTH*2));
         undistortcontrol->add(focaly->set("FOCAL_Y_"+ofToString(i),0,-VIDEO_HEIGHT*2,VIDEO_HEIGHT*2));
         undistortcontrol->add(centerx->set("CENTER_X_"+ofToString(i),-VIDEO_WIDTH*2,0,VIDEO_WIDTH*2));
         undistortcontrol->add(centery->set("CENTER_Y_"+ofToString(i),0,-VIDEO_HEIGHT*2,VIDEO_HEIGHT*2));
-        
+        undistortcontrol->add(barrelpower->set("BARRELPOWER_"+ofToString(i),0,-100,100));
         radialDistX.push_back(radialdistX);
         radialDistY.push_back(radialdistY);
         tangentDistX.push_back(tangentdistX);
@@ -111,6 +115,7 @@ void VideoGrabberManager::setup()
         focalY.push_back(focaly);
         centerX.push_back(centerx);
         centerY.push_back(centery);
+        BarrelPowers.push_back(barrelpower);
         
         undistortControls.push_back(undistortcontrol);
         
@@ -188,33 +193,40 @@ void VideoGrabberManager::update()
     for(std::size_t i = 0; i < grabbers.size(); i++)
     {
         grabbers[i]->update();
-        if(grabbers[i]->isFrameNew() && grabbers[i]->isConnected())
-        {
-            textures[i]->loadData(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight(),GL_RGB);
+//        if(grabbers[i]->isFrameNew() && grabbers[i]->isConnected())
+//        {
+////            textures[i]->loadData(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight(),GL_RGB);
 //            cvImages[i]->setFromPixels(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight());
 //            cvImages[i]->undistort(radialDistX[i]->get(),  radialDistY[i]->get(),  tangentDistX[i]->get(),  tangentDistY[i]->get(),  focalX[i]->get(),  focalY[i]->get(),  centerX[i]->get(),  centerY[i]->get()) ;
-//            
-        }
+//        }
     }
-    
+//    ofEnableNormalizedTexCoords();
     
     fbo.begin();
     ofClear(0, 0, 0);
     ofSetColor(ofColor::white);
-    for(std::size_t i = 0; i < textures.size(); i++)
+    for(std::size_t i = 0; i < grabbers.size(); i++)
     {
-        blendShader.begin();
-        if(textures[i]->isAllocated())
-        {
-        blendShader.setUniformTexture("Tex0", *textures[i].get(), 0);
-        blendShader.setUniform1f("alphaL", alphaLs[i]->get());
-        blendShader.setUniform1f("alphaR", alphaRs[i]->get());
-        blendShader.setUniform1f("sizeL", sizeLs[i]->get());
-        blendShader.setUniform1f("sizeR", sizeRs[i]->get());
-        textures[i]->draw(ipCamX[i]->get(), ipCamY[i]->get(), ipCamW[i]->get(), ipCamH[i]->get());
-        }
-        blendShader.end();
 
+        if(enableShader.get())
+        {
+            blendShader.begin();
+            blendShader.setUniform1f("width", grabbers[i]->getWidth());
+            blendShader.setUniform1f("height", grabbers[i]->getHeight());
+            blendShader.setUniform1f("alphaL", alphaLs[i]->get());
+            blendShader.setUniform1f("alphaR", alphaRs[i]->get());
+            blendShader.setUniform1f("sizeL", sizeLs[i]->get());
+            blendShader.setUniform1f("sizeR", sizeRs[i]->get());
+            blendShader.setUniform1f("BarrelPower", BarrelPowers[i]->get());
+
+            blendShader.setUniformTexture("tex0", grabbers[i]->getTextureReference(), 0);
+        }
+        grabbers[i]->draw(ipCamX[i]->get(), ipCamY[i]->get(), ipCamW[i]->get(), ipCamH[i]->get());
+        if(enableShader.get())
+        {
+            blendShader.end();
+        }
+        
     }
     fbo.end();
     
@@ -222,16 +234,7 @@ void VideoGrabberManager::update()
 void VideoGrabberManager::draw()
 {
     ofSetColor(ofColor::white);
-    for(std::size_t i = 0; i < textures.size(); i++)
-    {
-        //        blendShader.begin();
-        //        blendShader.setUniformTexture("Tex0", grabbers[i]->getTextureReference(), 0);
-        //        blendShader.setUniform1f("alphaL", alphaLs[i]->get());
-        //        blendShader.setUniform1f("alphaR", alphaRs[i]->get());
-        //        blendShader.setUniform1f("sizeL", sizeLs[i]->get());
-        //        blendShader.setUniform1f("sizeR", sizeRs[i]->get());
-        textures[i]->draw(ipCamX[i]->get(), ipCamY[i]->get(), ipCamW[i]->get(), ipCamH[i]->get());
-        //        blendShader.end();
-        
-    }
+
+    fbo.draw(0,0,ofGetWidth(),ofGetHeight());
+    
 }
