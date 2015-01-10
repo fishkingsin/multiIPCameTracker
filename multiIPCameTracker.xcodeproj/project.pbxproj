@@ -14,6 +14,7 @@
 		125506CD3E5F428AAFE5CC65 /* ofxTCPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F399B91E98DC31CDA6DDACB4 /* ofxTCPManager.cpp */; };
 		1587708E3CAC72997E43504E /* ofxUIRangeSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2813E36CEFD8D1C1B70E600 /* ofxUIRangeSlider.cpp */; };
 		169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A03390302D5A2C9F0E4AB /* ofxCvFloatImage.cpp */; };
+		1A934DD41A601DAE00A77265 /* cvTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A934DD21A601DAE00A77265 /* cvTracker.cpp */; };
 		1AAC1B691A5C19C5004E82D9 /* VideoGrabberManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AAC1B671A5C19C5004E82D9 /* VideoGrabberManager.cpp */; };
 		1AF24E2B1A5D68D70026230B /* guiBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AF24DF61A5D68D70026230B /* guiBaseObject.cpp */; };
 		1AF24E2C1A5D68D70026230B /* guiCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AF24DF81A5D68D70026230B /* guiCallback.cpp */; };
@@ -216,6 +217,8 @@
 		17E06821FB98542FDB806E50 /* ofxUIMultiImageButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIMultiImageButton.cpp; path = ../../../addons/ofxUI/src/ofxUIMultiImageButton.cpp; sourceTree = SOURCE_ROOT; };
 		17E65988300FBD9AAA2CD0CA /* ofxGui.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxGui.h; path = ../../../addons/ofxGui/src/ofxGui.h; sourceTree = SOURCE_ROOT; };
 		1902452F5E510A2DBC1E5BD6 /* ofxUIMultiImageToggle.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUIMultiImageToggle.h; path = ../../../addons/ofxUI/src/ofxUIMultiImageToggle.h; sourceTree = SOURCE_ROOT; };
+		1A934DD21A601DAE00A77265 /* cvTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cvTracker.cpp; sourceTree = "<group>"; };
+		1A934DD31A601DAE00A77265 /* cvTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvTracker.h; sourceTree = "<group>"; };
 		1AAC1B661A5C19B9004E82D9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		1AAC1B671A5C19C5004E82D9 /* VideoGrabberManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoGrabberManager.cpp; sourceTree = "<group>"; };
 		1AAC1B681A5C19C5004E82D9 /* VideoGrabberManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoGrabberManager.h; sourceTree = "<group>"; };
@@ -1488,6 +1491,8 @@
 			children = (
 				1AAC1B671A5C19C5004E82D9 /* VideoGrabberManager.cpp */,
 				1AAC1B681A5C19C5004E82D9 /* VideoGrabberManager.h */,
+				1A934DD21A601DAE00A77265 /* cvTracker.cpp */,
+				1A934DD31A601DAE00A77265 /* cvTracker.h */,
 				1AAC1B661A5C19B9004E82D9 /* Constants.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
@@ -1750,6 +1755,7 @@
 				222C3AB10FA3158602718602 /* ofxUIMultiImageButton.cpp in Sources */,
 				F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */,
 				E3D59A6B55F05669B3FBF8BD /* ofxUINumberDialer.cpp in Sources */,
+				1A934DD41A601DAE00A77265 /* cvTracker.cpp in Sources */,
 				D60E54E7FD6E19BC8636E0D2 /* ofxUIRadio.cpp in Sources */,
 				1587708E3CAC72997E43504E /* ofxUIRangeSlider.cpp in Sources */,
 				59C5F2F5D7254C33C00F97CB /* ofxUIRectangle.cpp in Sources */,

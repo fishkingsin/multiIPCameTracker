@@ -7,6 +7,7 @@ void ofApp::setup(){
     ofEnableAntiAliasing();
     ofEnableAlphaBlending();
     videoManager.setup();
+    cvtracker.setup(videoManager.fbo.getWidth(), videoManager.fbo.getHeight());
     gui.loadFont("MONACO.TTF", 8);
     gui.setup("multiIPCam", 0, 0, ofGetWidth(), ofGetHeight());
     gui.setBackgroundColor(0, 0, 0, 125);
@@ -46,7 +47,7 @@ void ofApp::setup(){
     gui.setWhichColumn(0);
     for(int i = 0 ; i < videoManager.ipcamRectControls.size(); i++)
     {
-        gui.addDrawableRect("videos"+ofToString(i), videoManager.grabbers[i].get() , ofGetWidth()/4, VIDEO_HEIGHT);
+        gui.addDrawableRect("videos"+ofToString(i), videoManager.grabbers[i].get() , ofGetWidth()/4-(30), VIDEO_HEIGHT);
         gui.addGroup(*videoManager.undistortControls[i].get());
     }
     
@@ -64,11 +65,21 @@ void ofApp::setup(){
     }
     gui.setWhichColumn(1);
     gui.addDrawableRect("fbo", &videoManager.fbo, VIDEO_WIDTH*2, VIDEO_HEIGHT);
+    
+    
+    gui.setWhichPanel(3);
+    gui.setWhichColumn(0);
+    gui.addGroup(*cvtracker.trackerControl.get());
+    
+    gui.addDrawableRect("fbo", &cvtracker.fbo, VIDEO_WIDTH, VIDEO_HEIGHT);
+
+    gui.addDrawableRect("cvImage", &cvtracker.cvImage, VIDEO_WIDTH, VIDEO_HEIGHT);
+    gui.addDrawableRect("cvGrayImage", &cvtracker.grayImage, VIDEO_WIDTH, VIDEO_HEIGHT);
     //SETTINGS AND EVENTS
     
     //load from xml!
     gui.loadSettings("controlPanelSettings.xml");
-    
+
     //if you want to use events call this after you have added all your gui elements
     gui.setupEvents();
     gui.enableEvents();
@@ -134,6 +145,7 @@ void ofApp::update(){
     appFrameRate	= ofGetFrameRate();
 
     videoManager.update();
+    cvtracker.update(videoManager.fbo , videoManager.fbo.getWidth(), videoManager.fbo.getHeight());
     gui.update();
 }
 

@@ -10,6 +10,10 @@ const float PI = 3.1415926535;
 const float HLAF_PI = PI*0.5;
 // varying vec4 Vertex_UV;
 uniform float BarrelPower;
+// uniform vec2 radialdist;
+// uniform vec2 tangentdist;
+// uniform vec2 focal;
+// uniform vec2 center;
 vec2 Distort(vec2 p)
 {
 		float theta  = atan(p.y, p.x);
@@ -23,16 +27,16 @@ vec2 Distort(vec2 p)
 void main(void)
 {
 
-	vec2 xy = 2.0 * gl_TexCoord[0].xy - 1.0;
+	vec2 xy = 2.0 * (gl_TexCoord[0].xy / vec2(width,height))- 1.0;
 	vec2 uv;
 	float d = length(xy);
-	if (d < 1.0)
+	// if (d < 1.0)
 	{
-		uv = Distort(xy);
+		uv = Distort(xy)*vec2(width,height);
 	}
-	else
+	// else
 	{
-		uv = gl_TexCoord[0].xy;
+		// uv = gl_TexCoord[0].xy;
 	}
 	vec4 c = vec4(1.0,1.0,1.0,1.0);
 	

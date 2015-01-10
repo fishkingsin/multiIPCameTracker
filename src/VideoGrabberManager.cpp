@@ -75,7 +75,8 @@ void VideoGrabberManager::setup()
         shaderControl->add(ar->set("ALPHA_RIGHT_"+ofToString(i),0,0,1));
         shaderControl->add(sl->set("SIZE_LEFT_"+ofToString(i),0,0,VIDEO_WIDTH));
         shaderControl->add(sr->set("SIZE_RIGHT_"+ofToString(i),0,0,VIDEO_WIDTH));
-        
+        ofPtr<ofParameter<float> >  barrelpower = ofPtr<ofParameter<float> > (new ofParameter<float>);
+        shaderControl->add(barrelpower->set("BARRELPOWER_"+ofToString(i),0,-2,2));
         
         alphaLs.push_back(al);
         alphaRs.push_back(ar);
@@ -95,7 +96,7 @@ void VideoGrabberManager::setup()
         ofPtr<ofParameter<float> >  focaly = ofPtr<ofParameter<float> > (new ofParameter<float>);
         ofPtr<ofParameter<float> >  centerx = ofPtr<ofParameter<float> > (new ofParameter<float>);
         ofPtr<ofParameter<float> >  centery = ofPtr<ofParameter<float> > (new ofParameter<float>);
-        ofPtr<ofParameter<float> >  barrelpower = ofPtr<ofParameter<float> > (new ofParameter<float>);
+
         
         
         undistortcontrol->add(radialdistX->set("RADIALDIST_X_"+ofToString(i),0,-1,1));
@@ -106,7 +107,7 @@ void VideoGrabberManager::setup()
         undistortcontrol->add(focaly->set("FOCAL_Y_"+ofToString(i),0,-VIDEO_HEIGHT*2,VIDEO_HEIGHT*2));
         undistortcontrol->add(centerx->set("CENTER_X_"+ofToString(i),-VIDEO_WIDTH*2,0,VIDEO_WIDTH*2));
         undistortcontrol->add(centery->set("CENTER_Y_"+ofToString(i),0,-VIDEO_HEIGHT*2,VIDEO_HEIGHT*2));
-        undistortcontrol->add(barrelpower->set("BARRELPOWER_"+ofToString(i),0,-100,100));
+        
         radialDistX.push_back(radialdistX);
         radialDistY.push_back(radialdistY);
         tangentDistX.push_back(tangentdistX);

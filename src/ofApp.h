@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxControlPanel.h"
 #include "VideoGrabberManager.h"
+#include "cvTracker.h"
 class ofApp : public ofBaseApp{
     
 public:
@@ -31,4 +32,5 @@ public:
     simpleLogger logger;
     
     VideoGrabberManager videoManager;
+    cvTracker cvtracker;
 };
