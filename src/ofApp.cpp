@@ -153,11 +153,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    videoManager.draw();
-    cvtracker.opticalFlow.draw();
-    ofPushStyle();
+    
+//    videoManager.draw();
+//    cvtracker.opticalFlow.draw();
+//    ofPushStyle();
     gui.draw();
-    ofPopStyle();
+//    ofPopStyle();
 }
 
 //--------------------------------------------------------------

@@ -51,7 +51,7 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
     }
     catch(exception e)
     {
-        ofLogVerbose() << e;
+        ofLogVerbose() << e.what();
     }
     fbo.begin();
     ofPushStyle();
