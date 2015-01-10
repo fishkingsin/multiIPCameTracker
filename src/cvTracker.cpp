@@ -36,6 +36,8 @@ void cvTracker::setup(int width, int height)
     trackerControl->add( bFindHoles->set("bFindHoles",true));
     trackerControl->add( bUseApproximation->set("bUseApproximation",true));
     trackerControl->add( bBlur->set("bBlur",true));
+    
+    sender.setup(HOST, PORT);
 }
 void cvTracker::update(ofFbo &infbo, int width, int height)
 {
@@ -44,7 +46,7 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
         incoming_pixels.allocate(infbo.getWidth(), infbo.getHeight(), OF_IMAGE_COLOR);
     }
     infbo.readToPixels(incoming_pixels);
-    opticalFlow.update(incoming_pixels.getPixels() , infbo.getWidth(), infbo.getHeight() , OF_IMAGE_COLOR);
+    opticalFlow.update(incoming_pixels.getPixels() , incoming_pixels.getWidth(), incoming_pixels.getHeight() , OF_IMAGE_COLOR);
     fbo.begin();
     ofPushStyle();
     ofSetColor(0);
@@ -52,7 +54,8 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
     ofRect(0, 0, width,height);
     ofPopStyle();
     ofSetColor(255);
-    opticalFlow.draw(width,height);
+//    infbo.draw(0,0,width,height);
+    opticalFlow.draw(width,height,5,4);
     fbo.end();
     fbo.readToPixels(pixels);
     cvImage.setFromPixels(pixels.getPixels(), width,height);
@@ -77,5 +80,21 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
                                bUseApproximation->get());	// find holes
     
     grayBg = grayImage;
+//    ofxOscBundle bundle;
+//    ofxOscMessage m;
+    if(contourFinder.nBlobs>0)
+    {
+        ofxOscBundle bundle;
+        for (int i = 0; i < contourFinder.nBlobs; i++){
+            ofxOscMessage m;
+            m.setAddress("/contour");
+            m.addFloatArg(contourFinder.blobs[i].boundingRect.getCenter().x);
+            m.addFloatArg(contourFinder.blobs[i].boundingRect.getCenter().y);
+            sender.sendMessage(m);
+            bundle.addMessage(m);
+        }
+         sender.sendBundle(bundle);
+    }
+   
 
 }

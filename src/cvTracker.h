@@ -12,6 +12,9 @@
 #include "ofMain.h"
 #include "ofxOpenCV.h"
 #include "ofxOpticalFlowLK.h"
+#include "ofxOsc.h"
+#define HOST "localhost"
+#define PORT 12345
 class cvTracker
 {
 public:
@@ -34,6 +37,8 @@ public:
     ofPtr<ofParameter<bool> > bFindHoles;
     ofPtr<ofParameter<bool> > bUseApproximation ;
     ofPtr<ofParameter<bool> > bBlur;
+    
+    ofxOscSender sender;
 
 };
 #endif /* defined(__multiIPCameTracker__cvTracker__) */

@@ -75,6 +75,8 @@ void ofApp::setup(){
 
     gui.addDrawableRect("cvImage", &cvtracker.cvImage, VIDEO_WIDTH, VIDEO_HEIGHT);
     gui.addDrawableRect("cvGrayImage", &cvtracker.grayImage, VIDEO_WIDTH, VIDEO_HEIGHT);
+    gui.addDrawableRect("cvGrayImage", &cvtracker.grayDiff , VIDEO_WIDTH, VIDEO_HEIGHT);
+    gui.addDrawableRect("contourFinder", &cvtracker.contourFinder , VIDEO_WIDTH, VIDEO_HEIGHT);    
     //SETTINGS AND EVENTS
     
     //load from xml!
@@ -152,6 +154,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     videoManager.draw();
+    cvtracker.opticalFlow.draw();
     ofPushStyle();
     gui.draw();
     ofPopStyle();

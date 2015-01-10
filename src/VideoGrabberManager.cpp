@@ -12,6 +12,7 @@ void VideoGrabberManager::setup()
 //    ofEnableNormalizedTexCoords();
 //    ofDisableArbTex();
 //    blendShader.load("shaders/SmoothEdgeBlend");
+    nextCamera = 0;
         blendShader.load("shaders/simpleBlend");
     loadCameras();
     // initialize connection
@@ -121,15 +122,16 @@ void VideoGrabberManager::setup()
         undistortControls.push_back(undistortcontrol);
         
     }
-    fbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
+    fbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT,GL_RGB);
 }
 
 //------------------------------------------------------------------------------
 
 IPCameraDef& VideoGrabberManager::getNextCamera()
 {
+    int index = nextCamera;
     nextCamera = (nextCamera + 1) % ipcams.size();
-    return ipcams[nextCamera];
+    return ipcams[index];
 }
 
 //------------------------------------------------------------------------------
@@ -186,7 +188,7 @@ void VideoGrabberManager::loadCameras()
     
     ofLog(OF_LOG_NOTICE, "-----------Loading Streams Complete----------");
     
-    nextCamera = ipcams.size();
+    nextCamera = 0;//ipcams.size();
 }
 void VideoGrabberManager::update()
 {
