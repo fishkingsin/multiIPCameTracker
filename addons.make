@@ -2,10 +2,9 @@ ofxGui
 ofxNetwork
 ofxOpenCv
 ofxOsc
-ofxThreadedImageLoader
-ofxVectorGraphics
 ofxXmlSettings
 ofxAutoReloadedShader
+ofxControlPanel
 ofxCv
 ofxIpVideoGrabber
 ofxOpticalFlowLK
