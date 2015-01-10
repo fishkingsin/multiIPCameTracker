@@ -12,7 +12,6 @@ void cvTracker::setup(int width, int height)
     fbo.allocate(width,height,GL_RGB);
     pixels.allocate(width,height,OF_IMAGE_COLOR);
     
-    
     opticalFlow.setup(ofRectangle(0, 0, width, height));
     cvImage.allocate(width, height);
     grayImage.allocate(width, height);
@@ -46,7 +45,14 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
         incoming_pixels.allocate(infbo.getWidth(), infbo.getHeight(), OF_IMAGE_COLOR);
     }
     infbo.readToPixels(incoming_pixels);
+    try
+    {
     opticalFlow.update(incoming_pixels.getPixels() , incoming_pixels.getWidth(), incoming_pixels.getHeight() , OF_IMAGE_COLOR);
+    }
+    catch(exception e)
+    {
+        ofLogVerbose() << e;
+    }
     fbo.begin();
     ofPushStyle();
     ofSetColor(0);
@@ -84,16 +90,29 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
 //    ofxOscMessage m;
     if(contourFinder.nBlobs>0)
     {
-        ofxOscBundle bundle;
+        ofParameterGroup pGroup;
+//        ofxOscBundle bundle;
         for (int i = 0; i < contourFinder.nBlobs; i++){
-            ofxOscMessage m;
-            m.setAddress("/contour");
-            m.addFloatArg(contourFinder.blobs[i].boundingRect.getCenter().x);
-            m.addFloatArg(contourFinder.blobs[i].boundingRect.getCenter().y);
-            sender.sendMessage(m);
-            bundle.addMessage(m);
+//            ofxOscMessage m;
+//            m.setAddress("/contour");
+            
+//            m.addFloatArg(contourFinder.blobs[i].boundingRect.getCenter().x);
+//            m.addFloatArg(contourFinder.blobs[i].boundingRect.getCenter().y);
+//            sender.sendMessage(m);
+//            bundle.addMessage(m);
+
+//            ofxOscMessage m_hue;
+//            m_hue.setAddress("/hue");
+//            m_hue.addIntArg(c.getHue());
+//            bundle.addMessage(m_hue);
+            ofParameter<ofColor>color;
+            ofParameter<ofVec2f>v2;
+            pGroup.add(v2.set("contour", contourFinder.blobs[i].boundingRect.getCenter()));
+            pGroup.add(color.set("color", incoming_pixels.getColor(contourFinder.blobs[i].boundingRect.getCenter().x, contourFinder.blobs[i].boundingRect.getCenter().x)));
+
         }
-         sender.sendBundle(bundle);
+//         sender.sendBundle(bundle);
+        sender.sendParameter(pGroup);
     }
    
 
