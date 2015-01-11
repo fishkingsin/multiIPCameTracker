@@ -10,6 +10,7 @@
 #define __multiIPCameTracker__cvTracker__
 
 #include "ofMain.h"
+#include "Constants.h"
 #include "ofxOpenCV.h"
 #include "ofxOpticalFlowLK.h"
 #include "ofxOsc.h"

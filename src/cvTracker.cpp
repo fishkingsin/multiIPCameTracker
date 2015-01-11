@@ -47,7 +47,7 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
     infbo.readToPixels(incoming_pixels);
     try
     {
-    opticalFlow.update(incoming_pixels.getPixels() , incoming_pixels.getWidth(), incoming_pixels.getHeight() , OF_IMAGE_COLOR);
+        opticalFlow.update(incoming_pixels.getPixels() , incoming_pixels.getWidth(), incoming_pixels.getHeight() , OF_IMAGE_COLOR);
     }
     catch(exception e)
     {
@@ -60,7 +60,7 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
     ofRect(0, 0, width,height);
     ofPopStyle();
     ofSetColor(255);
-//    infbo.draw(0,0,width,height);
+    //    infbo.draw(0,0,width,height);
     opticalFlow.draw(width,height,5,4);
     fbo.end();
     fbo.readToPixels(pixels);
@@ -86,34 +86,37 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
                                bUseApproximation->get());	// find holes
     
     grayBg = grayImage;
-//    ofxOscBundle bundle;
-//    ofxOscMessage m;
+    //    ofxOscBundle bundle;
+    //    ofxOscMessage m;
     if(contourFinder.nBlobs>0)
     {
         ofParameterGroup pGroup;
-//        ofxOscBundle bundle;
+        pGroup.setName("cvtracker");
+        //        ofxOscBundle bundle;
         for (int i = 0; i < contourFinder.nBlobs; i++){
-//            ofxOscMessage m;
-//            m.setAddress("/contour");
+            //            ofxOscMessage m;
+            //            m.setAddress("/contour");
             
-//            m.addFloatArg(contourFinder.blobs[i].boundingRect.getCenter().x);
-//            m.addFloatArg(contourFinder.blobs[i].boundingRect.getCenter().y);
-//            sender.sendMessage(m);
-//            bundle.addMessage(m);
-
-//            ofxOscMessage m_hue;
-//            m_hue.setAddress("/hue");
-//            m_hue.addIntArg(c.getHue());
-//            bundle.addMessage(m_hue);
+            //            m.addFloatArg(contourFinder.blobs[i].boundingRect.getCenter().x);
+            //            m.addFloatArg(contourFinder.blobs[i].boundingRect.getCenter().y);
+            //            sender.sendMessage(m);
+            //            bundle.addMessage(m);
+            
+            //            ofxOscMessage m_hue;
+            //            m_hue.setAddress("/hue");
+            //            m_hue.addIntArg(c.getHue());
+            //            bundle.addMessage(m_hue);
             ofParameter<ofColor>color;
             ofParameter<ofVec2f>v2;
-            pGroup.add(v2.set("contour", contourFinder.blobs[i].boundingRect.getCenter()));
-            pGroup.add(color.set("color", incoming_pixels.getColor(contourFinder.blobs[i].boundingRect.getCenter().x, contourFinder.blobs[i].boundingRect.getCenter().x)));
-
+            pGroup.add(v2.set("contour", ofVec2f(contourFinder.blobs[i].boundingRect.getCenter().x/VIDEO_WIDTH , contourFinder.blobs[i].boundingRect.getCenter().y / VIDEO_HEIGHT)));
+            ofColor c = incoming_pixels.getColor(contourFinder.blobs[i].boundingRect.getCenter().x, contourFinder.blobs[i].boundingRect.getCenter().x);
+            ofLogVerbose ("color") << c;
+            pGroup.add(color.set("color",c) );
+            
         }
-//         sender.sendBundle(bundle);
+        //         sender.sendBundle(bundle);
         sender.sendParameter(pGroup);
     }
-   
-
+    
+    
 }

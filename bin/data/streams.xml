@@ -1,6 +1,6 @@
 <streams>
 	<!-- <stream url="http://67.208.104.218/anony/mjpg.cgi"/> -->
-	<stream url="http://10.0.1.13:8081"/>
+	<stream url="http://10.0.1.9:8081"/>
 	<stream url="http://148.61.142.228/axis-cgi/mjpg/video.cgi?resolution=320x240"/>
 	<!-- <stream url="http://82.79.176.85:8081/axis-cgi/mjpg/video.cgi?resolution=320x240"/> -->
 	<stream url="http://24.155.150.53/anony/mjpg.cgi"/>
