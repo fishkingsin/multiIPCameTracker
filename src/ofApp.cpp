@@ -33,6 +33,7 @@ void ofApp::setup(){
     vars.add( appFrameCount.set("frame count", 0) );
     vars.add( appFrameRate.set("frame rate", 60.0) );
     vars.add( elapsedTime.set("elapsed time", 0.0) );
+
     gui.addVariableLister(vars);
 
     gui.setWhichColumn(1);
@@ -40,7 +41,8 @@ void ofApp::setup(){
     gui.enableIgnoreLayoutFlag();
     gui.addLogger("events logger", &logger, 410, 300);
     gui.disableIgnoreLayoutFlag();
-
+    gui.addToggle( bDebug.set("DEBUG" , true));
+    bDebug.addListener(this, &ofApp::enableDebug);
     //--------- PANEL 2
     gui.setWhichPanel(1);
     
@@ -69,7 +71,7 @@ void ofApp::setup(){
     
     gui.setWhichPanel(3);
     gui.setWhichColumn(0);
-    gui.addGroup(*cvtracker.trackerControl.get());
+    gui.addGroup(cvtracker.trackerControl);
     
     gui.addDrawableRect("fbo", &cvtracker.fbo, VIDEO_WIDTH, VIDEO_HEIGHT);
 
@@ -163,7 +165,19 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    if(key==OF_KEY_TAB)
+    {
+        bDebug = !bDebug;
+        if(!bDebug)
+        {
+            ofSetLogLevel(OF_LOG_SILENT);
+            gui.hide();
+        }
+        else{
+            ofSetLogLevel(OF_LOG_VERBOSE);
+            gui.show();
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -206,4 +220,16 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+
+void ofApp::enableDebug(bool &b)
+{
+    if(!bDebug)
+    {
+        gui.hide();
+    }
+    else{
+        gui.show();
+    }
 }

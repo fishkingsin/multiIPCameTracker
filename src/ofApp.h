@@ -28,9 +28,11 @@ public:
     ofParameter <float> elapsedTime;
     ofParameter <int> appFrameCount;
     ofParameter <float> appFrameRate;
-    
+    ofParameter <bool> bDebug;
+    void enableDebug(bool &b);
     simpleLogger logger;
     
     VideoGrabberManager videoManager;
     cvTracker cvtracker;
+    
 };

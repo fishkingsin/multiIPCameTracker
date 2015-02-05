@@ -30,14 +30,16 @@ public:
     ofxCvGrayscaleImage 	grayBg;
     ofxCvGrayscaleImage 	grayDiff;
     ofxCvContourFinder 	contourFinder;
-    ofPtr<ofParameterGroup> trackerControl;
-    ofPtr<ofParameter<int> >  threshold;
-    ofPtr<ofParameter<int> > minArea;
-    ofPtr<ofParameter<int> > maxArea;
-    ofPtr<ofParameter<int> > nConsidered;
-    ofPtr<ofParameter<bool> > bFindHoles;
-    ofPtr<ofParameter<bool> > bUseApproximation ;
-    ofPtr<ofParameter<bool> > bBlur;
+    ofParameterGroup trackerControl;
+    ofParameter<bool>bUseFlow;
+    ofParameter<int>threshold;
+    ofParameter<int>minArea;
+    ofParameter<int>maxArea;
+    ofParameter<int>nConsidered;
+    ofParameter<bool>bFindHoles;
+    ofParameter<bool>bUseApproximation ;
+    ofParameter<bool>bBlur;
+    ofParameter<bool>bSetBackground;
     
     ofxOscSender sender;
 
