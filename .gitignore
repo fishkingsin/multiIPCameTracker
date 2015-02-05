@@ -34,3 +34,4 @@ bin/multiIPCameTrackerDebug.app
 *obj/*
 *.exp
 *.sdf
+*.opensdf
