@@ -122,7 +122,7 @@
         <val_0>0</val_0>
     </CAM_RECT_Y_0>
     <CAM_RECT_W_0>
-        <val_0>67.6923</val_0>
+        <val_0>174.769</val_0>
     </CAM_RECT_W_0>
     <CAM_RECT_H_0>
         <val_0>240</val_0>
@@ -130,13 +130,13 @@
 </CAM_RECT_0>
 <CAM_RECT_1>
     <CAM_RECT_X_1>
-        <val_0>55.3846</val_0>
+        <val_0>123.077</val_0>
     </CAM_RECT_X_1>
     <CAM_RECT_Y_1>
         <val_0>0</val_0>
     </CAM_RECT_Y_1>
     <CAM_RECT_W_1>
-        <val_0>104.615</val_0>
+        <val_0>208</val_0>
     </CAM_RECT_W_1>
     <CAM_RECT_H_1>
         <val_0>240</val_0>
@@ -181,10 +181,10 @@
         <val_0>0</val_0>
     </SIZE_LEFT_0>
     <SIZE_RIGHT_0>
-        <val_0>65.2308</val_0>
+        <val_0>160</val_0>
     </SIZE_RIGHT_0>
     <BARRELPOWER_0>
-        <val_0>1.12308</val_0>
+        <val_0>0.861538</val_0>
     </BARRELPOWER_0>
 </BLEND_CONTORL_0>
 <BLEND_CONTORL_1>
@@ -195,13 +195,13 @@
         <val_0>1</val_0>
     </ALPHA_RIGHT_1>
     <SIZE_LEFT_1>
-        <val_0>39.3846</val_0>
+        <val_0>217.846</val_0>
     </SIZE_LEFT_1>
     <SIZE_RIGHT_1>
-        <val_0>38.1538</val_0>
+        <val_0>0</val_0>
     </SIZE_RIGHT_1>
     <BARRELPOWER_1>
-        <val_0>0.892308</val_0>
+        <val_0>0.830769</val_0>
     </BARRELPOWER_1>
 </BLEND_CONTORL_1>
 <BLEND_CONTORL_2>
@@ -243,22 +243,22 @@
 </ENABLE_SHADER>
 <CV_opticalFlow_Tracking>
     <threashold>
-        <val_0>148</val_0>
+        <val_0>120</val_0>
     </threashold>
     <minArea>
-        <val_0>905</val_0>
+        <val_0>2677</val_0>
     </minArea>
     <maxArea>
-        <val_0>23349</val_0>
+        <val_0>74437</val_0>
     </maxArea>
     <nConsidered>
-        <val_0>5</val_0>
+        <val_0>16</val_0>
     </nConsidered>
     <bFindHoles>
-        <val_0>1</val_0>
+        <val_0>0</val_0>
     </bFindHoles>
     <bUseApproximation>
-        <val_0>1</val_0>
+        <val_0>0</val_0>
     </bUseApproximation>
     <bBlur>
         <val_0>1</val_0>

@@ -1,7 +1,7 @@
 <streams>
 	<!-- <stream url="http://67.208.104.218/anony/mjpg.cgi"/> -->
-	<stream url="http://192.168.2.22/video.mjpg"/>
-	<stream url="http://192.168.2.3:8081"/>
+	<stream url="http://192.168.1.120/video.mjpg"/>
+	<stream url="http://192.168.1.124/video.mjpg"/>
 	<!-- <stream url="http://192.168.2.22/video.mjpg"/>
 	<stream url="http://192.168.2.3:8081"/> -->
 	<!-- <stream url="http://10.0.1.9:8081"/> -->
