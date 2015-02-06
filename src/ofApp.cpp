@@ -33,7 +33,7 @@ void ofApp::setup(){
     vars.add( appFrameCount.set("frame count", 0) );
     vars.add( appFrameRate.set("frame rate", 60.0) );
     vars.add( elapsedTime.set("elapsed time", 0.0) );
-
+	gui.addToggle(toggleMinimize.set("MINIMIZE",false));
     gui.addVariableLister(vars);
 
     gui.setWhichColumn(1);

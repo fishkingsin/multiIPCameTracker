@@ -34,5 +34,6 @@ public:
     
     VideoGrabberManager videoManager;
     cvTracker cvtracker;
+	ofParameter<bool>toggleMinimize;
     
 };
