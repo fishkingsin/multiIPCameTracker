@@ -270,3 +270,6 @@
 <DEBUG>
     <val_0>1</val_0>
 </DEBUG>
+<MINIMIZE>
+    <val_0>1</val_0>
+</MINIMIZE>

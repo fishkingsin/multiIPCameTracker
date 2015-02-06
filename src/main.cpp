@@ -4,7 +4,7 @@
 
 //========================================================================
 int main( ){
-#ifdef TARGET_OS_WIN32
+#if TARGET_OS_WIN32
 HWND handleWindow;
 AllocConsole();  
 handleWindow = FindWindowA("ConsoleWindowClass", NULL);  

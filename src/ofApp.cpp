@@ -12,13 +12,13 @@ void ofApp::setup(){
     gui.setup("multiIPCam", 0, 0, ofGetWidth(), ofGetHeight());
     gui.setBackgroundColor(0, 0, 0, 125);
     gui.addPanel("app info", 4, false);
-
-//    ofxControlPanel::setBackgroundColor(simpleColor(60, 30, 30, 200));
+    
+    //    ofxControlPanel::setBackgroundColor(simpleColor(60, 30, 30, 200));
     gui.addPanel("grabber", 4, false);
-//    gui.setBackgroundColor(0, 0, 0, 125);
-//    ofxControlPanel::setBackgroundColor(simpleColor(70, 70, 30, 200));
+    //    gui.setBackgroundColor(0, 0, 0, 125);
+    //    ofxControlPanel::setBackgroundColor(simpleColor(70, 70, 30, 200));
     gui.addPanel("fbo", 4, false);
-//    ofxControlPanel::setBackgroundColor(simpleColor(30, 30, 30, 200));
+    //    ofxControlPanel::setBackgroundColor(simpleColor(30, 30, 30, 200));
     
     //--------- PANEL 1
     gui.setWhichPanel(0);
@@ -33,15 +33,17 @@ void ofApp::setup(){
     vars.add( appFrameCount.set("frame count", 0) );
     vars.add( appFrameRate.set("frame rate", 60.0) );
     vars.add( elapsedTime.set("elapsed time", 0.0) );
-	gui.addToggle(toggleMinimize.set("MINIMIZE",false));
+    gui.addToggle(toggleMinimize.set("MINIMIZE",false));
+    gui.addToggle( bDebug.set("DEBUG" , true));
+    toggleMinimize.addListener(this, &ofApp::enableMinize);
     gui.addVariableLister(vars);
-
+    
     gui.setWhichColumn(1);
-
+    
     gui.enableIgnoreLayoutFlag();
     gui.addLogger("events logger", &logger, 410, 300);
     gui.disableIgnoreLayoutFlag();
-    gui.addToggle( bDebug.set("DEBUG" , true));
+
     bDebug.addListener(this, &ofApp::enableDebug);
     //--------- PANEL 2
     gui.setWhichPanel(1);
@@ -56,7 +58,7 @@ void ofApp::setup(){
     gui.setWhichPanel(2);
     gui.setWhichColumn(0);
     gui.addToggle(videoManager.enableShader.set("ENABLE_SHADER", false));
-
+    
     for(int i = 0 ; i < videoManager.ipcamRectControls.size(); i++)
     {
         gui.addGroup( *videoManager.ipcamRectControls[i].get() );
@@ -74,16 +76,16 @@ void ofApp::setup(){
     gui.addGroup(cvtracker.trackerControl);
     
     gui.addDrawableRect("fbo", &cvtracker.fbo, VIDEO_WIDTH, VIDEO_HEIGHT);
-
+    
     gui.addDrawableRect("cvImage", &cvtracker.cvImage, VIDEO_WIDTH, VIDEO_HEIGHT);
     gui.addDrawableRect("cvGrayImage", &cvtracker.grayImage, VIDEO_WIDTH, VIDEO_HEIGHT);
     gui.addDrawableRect("cvGrayImage", &cvtracker.grayDiff , VIDEO_WIDTH, VIDEO_HEIGHT);
-    gui.addDrawableRect("contourFinder", &cvtracker.contourFinder , VIDEO_WIDTH, VIDEO_HEIGHT);    
+    gui.addDrawableRect("contourFinder", &cvtracker.contourFinder , VIDEO_WIDTH, VIDEO_HEIGHT);
     //SETTINGS AND EVENTS
     
     //load from xml!
     gui.loadSettings("controlPanelSettings.xml");
-
+    
     //if you want to use events call this after you have added all your gui elements
     gui.setupEvents();
     gui.enableEvents();
@@ -94,7 +96,7 @@ void ofApp::setup(){
     ofAddListener(gui.guiEvent, this, &ofApp::eventsIn);
     
     //  --EVENT FOR SINGLE GUI OBJECT
-//    ofAddListener(gui.createEventGroup("GRAB_BACKGROUND"), this, &ofApp::grabBackgroundEvent);
+    //    ofAddListener(gui.createEventGroup("GRAB_BACKGROUND"), this, &ofApp::grabBackgroundEvent);
 }
 // this is our callback function for the GRAB_BACKGROUND toggle - everytime it changes this gets fired
 //--------------------------------------------------------------
@@ -102,8 +104,8 @@ void ofApp::grabBackgroundEvent(guiCallbackData & data){
     
     //we use the event callback to capture the background - we then set the toggle value back to its previous value
     if( data.isElement( "GRAB_BACKGROUND" ) && data.getInt(0) == 1 ){
-//        bgExample.captureBackground();
-//        gui.setValueB("GRAB_BACKGROUND", false);
+        //        bgExample.captureBackground();
+        //        gui.setValueB("GRAB_BACKGROUND", false);
     }
 }
 //this captures all our control panel events - unless its setup differently in testApp::setup
@@ -147,7 +149,7 @@ void ofApp::update(){
     elapsedTime		= ofGetElapsedTimef();
     appFrameCount	= ofGetFrameNum();
     appFrameRate	= ofGetFrameRate();
-
+    
     videoManager.update();
     cvtracker.update(videoManager.fbo , videoManager.fbo.getWidth(), videoManager.fbo.getHeight());
     gui.update();
@@ -156,11 +158,11 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-//    videoManager.draw();
-//    cvtracker.opticalFlow.draw();
-//    ofPushStyle();
+    //    videoManager.draw();
+    //    cvtracker.opticalFlow.draw();
+    //    ofPushStyle();
     gui.draw();
-//    ofPopStyle();
+    //    ofPopStyle();
 }
 
 //--------------------------------------------------------------
@@ -182,12 +184,12 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+    
 }
 
 //--------------------------------------------------------------
@@ -197,29 +199,29 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-//    gui.mousePressed(x, y, button);
+    //    gui.mousePressed(x, y, button);
     
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-//    gui.mouseReleased();
+    //    gui.mouseReleased();
 }
 
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+void ofApp::dragEvent(ofDragInfo dragInfo){
+    
 }
 
 
@@ -228,8 +230,22 @@ void ofApp::enableDebug(bool &b)
     if(!bDebug)
     {
         gui.hide();
+        ofSetLogLevel(OF_LOG_WARNING);
     }
     else{
         gui.show();
+        ofSetLogLevel(OF_LOG_VERBOSE);
     }
+}
+
+void ofApp::enableMinize(bool &b)
+{
+    if(b)
+    {
+        ofSetWindowShape(200, 100);
+    }
+    else{
+        ofSetWindowShape(1280, 720);
+    }
+    
 }

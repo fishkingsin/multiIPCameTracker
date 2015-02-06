@@ -36,4 +36,6 @@ public:
     cvTracker cvtracker;
 	ofParameter<bool>toggleMinimize;
     
+    void enableMinize(bool &b);
+    
 };
