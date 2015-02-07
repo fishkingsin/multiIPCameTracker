@@ -82,7 +82,7 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
     
     // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
     // also, find holes is set to true so we will get interior contours as well....
-    contourFinder.findContours(grayImage,
+    contourFinder.findContours(grayDiff,
                                minArea.get(),
                                maxArea.get(),
                                nConsidered.get(),
