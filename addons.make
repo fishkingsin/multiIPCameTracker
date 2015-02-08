@@ -7,6 +7,7 @@ ofxAutoReloadedShader
 ofxControlPanel
 ofxCv
 ofxIpVideoGrabber
+ofxMSAInteractiveObject
+ofxOpenCVExtensions
 ofxOpticalFlowLK
 ofxProjectorBlend
-ofxUI
