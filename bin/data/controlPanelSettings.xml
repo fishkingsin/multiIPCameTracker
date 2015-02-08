@@ -3,6 +3,7 @@
         <val_0>322.462</val_0>
     </CAM_RECT_X_0>
     <CAM_RECT_Y_0>
+
         <val_0>-70.1538</val_0>
     </CAM_RECT_Y_0>
     <CAM_RECT_W_0>
@@ -14,6 +15,7 @@
 </CAM_RECT_0>
 <CAM_RECT_1>
     <CAM_RECT_X_1>
+
         <val_0>163.692</val_0>
     </CAM_RECT_X_1>
     <CAM_RECT_Y_1>
@@ -85,6 +87,7 @@
         <val_0>0</val_0>
     </SIZE_RIGHT_1>
     <BARRELPOWER_1>
+
         <val_0>1</val_0>
     </BARRELPOWER_1>
 </BLEND_CONTORL_1>
@@ -130,6 +133,7 @@
         <val_0>53</val_0>
     </threashold>
     <minArea>
+
         <val_0>167</val_0>
     </minArea>
     <maxArea>
