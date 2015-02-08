@@ -73,7 +73,7 @@ void ofApp::setup(){
         gui.addGroup( *videoManager.shaderControls[i].get() );
     }
     gui.setWhichColumn(1);
-    gui.addDrawableRect("fbo", &videoManager.fbo, VIDEO_WIDTH*2, VIDEO_HEIGHT);
+    gui.addDrawableRect("fbo", &videoManager, VIDEO_WIDTH, VIDEO_HEIGHT);
     
     
     gui.setWhichPanel(3);
@@ -162,8 +162,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
-    //    videoManager.draw();
+
+    videoManager.drawQuadGui();
     //    cvtracker.opticalFlow.draw();
     //    ofPushStyle();
     gui.draw();
@@ -189,6 +189,7 @@ void ofApp::keyPressed(int key){
     {
         case  's':
             gui.saveSettings();
+            videoManager.saveQuad();
             break;
     }
 }

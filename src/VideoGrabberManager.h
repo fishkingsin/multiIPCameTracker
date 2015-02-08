@@ -14,6 +14,7 @@
 #include "ofxXmlSettings.h"
 #include "ofxOpenCv.h"
 #include "ofxAutoReloadedShader.h"
+#include "ofxCvCoordWarpingGui.h"
 class IPCameraDef
 {
 public:
@@ -58,12 +59,41 @@ private:
 using ofx::Video::IPVideoGrabber;
 using ofx::Video::SharedIPVideoGrabber;
 
-class VideoGrabberManager
+class VideoGrabberManager : public ofBaseDraws
 {
 public:
     void setup();
     void update();
-    void draw();
+    
+    //baseDraw
+    void draw(float x, float y)
+    {
+        draw(x,y,VIDEO_WIDTH , VIDEO_HEIGHT);
+    }
+    void draw(float x, float y, float w, float h);
+    void draw(const ofPoint & point) {
+        draw(point.x, point.y);
+    }
+    void draw(const ofRectangle & rect) {
+        draw(rect.x, rect.y, rect.width, rect.height);
+    }
+    void draw(const ofPoint & point, float w, float h) {
+        draw(point.x, point.y, w, h);
+    }
+    
+    float getHeight()
+    {
+        return fbo.getHeight();
+    }
+    float getWidth()
+    {
+        return fbo.getWidth();
+    }
+    
+    void setAnchorPercent(float xPct, float yPct){};
+    void setAnchorPoint(float x, float y){};
+    void resetAnchor(){};
+
     std::vector< ofPtr<IPVideoGrabber> > grabbers;
     void loadCameras();
     IPCameraDef& getNextCamera();
@@ -96,12 +126,22 @@ public:
     
     ofParameter<bool>enableShader;
     ofxAutoReloadedShader blendShader;
-        std::vector< ofPtr<ofxCvColorImage > > cvImages;
+    std::vector< ofPtr<ofxCvColorImage > > cvImages;
+        std::vector< ofPtr<ofxCvColorImage > > outputImages;
     
 //    std::vector< ofPtr<ofTexture > > textures;
     
     int nextCamera;
     ofFbo fbo;
+    vector<ofPtr<ofxCvCoordWarpingGui> >quadGuis;
+    void setupQuadGui (int i, int cameraWidth, int cameraHeight );
+    void drawQuadGui();
+    void drawQuadGui(int );
+    void drawQuadGui(int i, int x, int y, int width, int height );
+    void getQuadSubImage(ofxCvColorImage* inputImage, ofxCvColorImage* outputImage, vector <ofPoint>& quad, ofImageType imageType);
+    int cameraWidth;
+    int cameraHeight;
+    void saveQuad();
 };
 
 #endif /* defined(__wlbankinteractive__VideoGrabberManager__) */

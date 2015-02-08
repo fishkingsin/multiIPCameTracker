@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/VideoGrabberManager.cpp"
-            timestampString = "442579644.64158"
+            timestampString = "445068145.480608"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "VideoGrabberManager::setup()"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,12 +26,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/VideoGrabberManager.cpp"
-            timestampString = "442579708.776853"
+            timestampString = "445068145.480608"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "VideoGrabberManager::getNextCamera()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../addons/ofxOpenCVExtensions/src/ofxCvCoordWarpingGui.cpp"
+            timestampString = "445065570.285989"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "ofxCvCoordWarpingGui::selectPoint(float passedX, float passedY, float offsetX, float offsetY, float scaleWidth, float scaleHeight, float hitArea)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

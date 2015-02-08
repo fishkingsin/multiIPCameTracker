@@ -7,6 +7,8 @@
 //
 
 #include "VideoGrabberManager.h"
+
+
 void VideoGrabberManager::setup()
 {
 //    ofEnableNormalizedTexCoords();
@@ -60,6 +62,12 @@ void VideoGrabberManager::setup()
         cvimage->allocate(VIDEO_WIDTH , VIDEO_HEIGHT);
         cvimage->setUseTexture(true);
         cvImages.push_back(cvimage);
+        
+        ofPtr<ofxCvColorImage> outputImage = ofPtr<ofxCvColorImage>(new ofxCvColorImage);
+        outputImage->allocate(VIDEO_WIDTH , VIDEO_HEIGHT);
+        outputImage->setUseTexture(true);
+        outputImages.push_back(outputImage);
+        
 //        image->allocate(VIDEO_WIDTH , VIDEO_HEIGHT, GL_RGB);
         //        textures->setUseTexture(true);
 //        textures.push_back(image);
@@ -120,9 +128,10 @@ void VideoGrabberManager::setup()
         BarrelPowers.push_back(barrelpower);
         
         undistortControls.push_back(undistortcontrol);
-        
+        setupQuadGui(i,VIDEO_WIDTH, VIDEO_HEIGHT);
     }
     fbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT,GL_RGB);
+
 }
 
 //------------------------------------------------------------------------------
@@ -201,6 +210,13 @@ void VideoGrabberManager::update()
 //            textures[i]->loadData(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight(),GL_RGB);
             cvImages[i]->setFromPixels(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight());
             cvImages[i]->undistort(radialDistX[i]->get(),  radialDistY[i]->get(),  tangentDistX[i]->get(),  tangentDistY[i]->get(),  focalX[i]->get(),  focalY[i]->get(),  centerX[i]->get(),  centerY[i]->get()) ;
+                        vector <ofPoint> quadWarpScaled;
+            ofPoint * scaledPoints = quadGuis[i]->getScaledQuadPoints(cameraWidth,cameraHeight);
+            for (int i=0; i<4; i++){
+                quadWarpScaled.push_back( scaledPoints[i]);
+            }
+
+             getQuadSubImage(cvImages[i].get(), outputImages[i].get(), quadWarpScaled, OF_IMAGE_COLOR);
         }
     }
 //    ofEnableNormalizedTexCoords();
@@ -224,7 +240,7 @@ void VideoGrabberManager::update()
 
             blendShader.setUniformTexture("tex0", grabbers[i]->getTextureReference(), 0);
         }
-        cvImages[i]->draw(ipCamX[i]->get(), ipCamY[i]->get(), ipCamW[i]->get(), ipCamH[i]->get());
+        outputImages[i]->draw(ipCamX[i]->get(), ipCamY[i]->get(), ipCamW[i]->get(), ipCamH[i]->get());
         if(enableShader.get())
         {
             blendShader.end();
@@ -234,10 +250,125 @@ void VideoGrabberManager::update()
     fbo.end();
     
 }
-void VideoGrabberManager::draw()
+void VideoGrabberManager::draw(float x , float y, float w , float h)
 {
     ofSetColor(ofColor::white);
 
-    fbo.draw(0,0,ofGetWidth(),ofGetHeight());
+    fbo.draw(x,y,w,h);
+
+}
+
+//BR: Added some messiness here to setup, draw, and update the gui quad...
+
+void VideoGrabberManager::setupQuadGui (int i, int _cameraWidth, int _cameraHeight )
+{
     
+    quadGuis.push_back(ofPtr<ofxCvCoordWarpingGui>(new ofxCvCoordWarpingGui));
+    cameraWidth = _cameraWidth;
+    cameraHeight = _cameraHeight;
+    
+    // give the gui quad a starting setting
+    
+    quadGuis.back()->setup("QUAD_"+ofToString(i));
+    
+    ofPoint quadSrc[4];
+    quadSrc[0].set(0, 0);
+    quadSrc[1].set(cameraWidth, 0);
+    quadSrc[2].set(cameraWidth, cameraHeight);
+    quadSrc[3].set(0, cameraHeight);
+    quadGuis.back()->setQuadPoints(quadSrc);
+    
+    // give the gui quad a default setting
+//    settings.quadWarpOriginal[0].set(0, 0);
+//    settings.quadWarpOriginal[1].set(cameraWidth, 0);
+//    settings.quadWarpOriginal[2].set(cameraWidth, cameraHeight);
+//    settings.quadWarpOriginal[3].set(0, cameraHeight);
+    
+    //BR TO DO: add this into the normal settings file
+    quadGuis.back()->width = cameraWidth;
+    quadGuis.back()->height = cameraHeight;
+    quadGuis.back()->disableAppEvents();
+//    quadGuiSetup = true;
+
+//    quadGui.enableAllEvents();
+    quadGuis.back()->bCameraView = true;
+    quadGuis.back()->enableAllEvents();
+    quadGuis.back()->readFromFile("QUAD_Settings.xml");
+};
+
+void VideoGrabberManager::drawQuadGui()
+{
+    for(int i = 0 ; i< ipcams.size() ;i++)
+    {
+        drawQuadGui(i,i*VIDEO_WIDTH,0,VIDEO_WIDTH,VIDEO_HEIGHT);
+    }
+}
+void VideoGrabberManager::drawQuadGui(int i){
+    quadGuis[i]->draw();
+};
+
+void VideoGrabberManager::drawQuadGui(int i, int x, int y, int w, int h ){
+    cvImages[i]->draw(x,y,w,h);
+    quadGuis[i]->x = x;
+    quadGuis[i]->y = y;
+    quadGuis[i]->setScale((float) w/quadGuis[i]->width, (float) h/quadGuis[i]->height );
+    drawQuadGui(i);
+};
+void VideoGrabberManager::saveQuad()
+{
+    for(int  i = 0 ; i < quadGuis.size() ; i++)
+    {
+        quadGuis[i]->saveToFile("QUAD_Settings.xml");
+    }
+}
+void VideoGrabberManager::getQuadSubImage(ofxCvColorImage* inputImage, ofxCvColorImage* outputImage, vector <ofPoint>& quad, ofImageType imageType) {
+    if ( quad.size() < 4 ){
+        ofLog( OF_LOG_ERROR, "You must pass a vector of four points to this function");
+        return;
+    } // weird thing that could happen...
+    
+    static unsigned char * inpix;
+    static unsigned char * outpix;
+    inpix   = inputImage->getPixels();
+    outpix  = outputImage->getPixels();
+    
+    int inW, inH, outW, outH;
+    inW = inputImage->width;
+    inH = inputImage->height;
+    outW = outputImage->width;
+    outH = outputImage->height;
+    
+    int bpp = 1;
+    if (imageType == OF_IMAGE_COLOR){
+        bpp = 3;
+    } else if (imageType == OF_IMAGE_COLOR_ALPHA){
+        bpp = 4;
+    }
+    
+    int xinput =0;
+    int yinput = 0;
+    int inIndex = 0;
+    int outIndex = 0;
+    
+    float xlrp = 0.0;
+    float ylrp = 0.0;
+    
+    ofPoint p1, p2, p3, p4;
+    p1 = quad[0];
+    p2 = quad[1];
+    p3 = quad[2];
+    p4 = quad[3];
+    
+    for(int x=0;x<outW;x++) {
+        for(int y=0;y<outH;y++) {
+            xlrp = x/(float)outW;
+            ylrp = y/(float)outH;
+            xinput = (p1.x*(1-xlrp)+p2.x*xlrp)*(1-ylrp) + (p4.x*(1-xlrp)+p3.x*xlrp)*ylrp;
+            yinput = ((p1.y*(1-ylrp))+(p4.y*ylrp))*(1-xlrp) + (p2.y*(1-ylrp)+p3.y*ylrp)*xlrp;
+            inIndex = (xinput + (yinput*inW))*bpp;
+            outIndex = (x+y*outW)*bpp;
+            memcpy((outpix+outIndex),(inpix+inIndex),sizeof(unsigned char)*bpp);
+        }
+    }
+    outputImage->setFromPixels(outpix, outW, outH);
 }
