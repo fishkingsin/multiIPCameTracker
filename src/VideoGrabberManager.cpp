@@ -50,16 +50,16 @@ void VideoGrabberManager::setup()
         control->add(x->set("CAM_RECT_X_"+ofToString(i), 0, -VIDEO_WIDTH, VIDEO_WIDTH*ipcams.size()));
         control->add(y->set("CAM_RECT_Y_"+ofToString(i), 0, -VIDEO_HEIGHT, VIDEO_HEIGHT));
         control->add(w->set("CAM_RECT_W_"+ofToString(i), 0, -VIDEO_WIDTH, VIDEO_WIDTH*ipcams.size()));
-        control->add(h->set("CAM_RECT_H_"+ofToString(i), 0, -VIDEO_HEIGHT, VIDEO_HEIGHT));
+        control->add(h->set("CAM_RECT_H_"+ofToString(i), 0, -VIDEO_HEIGHT, VIDEO_HEIGHT*2));
         ipCamX.push_back(x);
         ipCamY.push_back(y);
         ipCamW.push_back(w);
         ipCamH.push_back(h);
         ipcamRectControls.push_back(control);
-//        ofPtr<ofxCvColorImage> cvimage = ofPtr<ofxCvColorImage>(new ofxCvColorImage);
-//        cvimage->allocate(VIDEO_WIDTH , VIDEO_HEIGHT);
-//        cvimage->setUseTexture(true);
-//        cvImages.push_back(cvimage);
+        ofPtr<ofxCvColorImage> cvimage = ofPtr<ofxCvColorImage>(new ofxCvColorImage);
+        cvimage->allocate(VIDEO_WIDTH , VIDEO_HEIGHT);
+        cvimage->setUseTexture(true);
+        cvImages.push_back(cvimage);
 //        image->allocate(VIDEO_WIDTH , VIDEO_HEIGHT, GL_RGB);
         //        textures->setUseTexture(true);
 //        textures.push_back(image);
@@ -104,10 +104,10 @@ void VideoGrabberManager::setup()
         undistortcontrol->add(radialdistY->set("RADIALDIST_Y_"+ofToString(i),0,-1,1));
         undistortcontrol->add(tangentdistX->set("TANGENTDIST_X_"+ofToString(i),0,-1,1));
         undistortcontrol->add(tangentdistY->set("TANGENTDIST_Y_"+ofToString(i),0,-1,1));
-        undistortcontrol->add(focalx->set("FOCAL_X_"+ofToString(i),0,-VIDEO_WIDTH*2,VIDEO_WIDTH*2));
-        undistortcontrol->add(focaly->set("FOCAL_Y_"+ofToString(i),0,-VIDEO_HEIGHT*2,VIDEO_HEIGHT*2));
-        undistortcontrol->add(centerx->set("CENTER_X_"+ofToString(i),-VIDEO_WIDTH*2,0,VIDEO_WIDTH*2));
-        undistortcontrol->add(centery->set("CENTER_Y_"+ofToString(i),0,-VIDEO_HEIGHT*2,VIDEO_HEIGHT*2));
+        undistortcontrol->add(focalx->set("FOCAL_X_"+ofToString(i),     VIDEO_WIDTH*0.5,    -VIDEO_WIDTH*2,     VIDEO_WIDTH*2));
+        undistortcontrol->add(focaly->set("FOCAL_Y_"+ofToString(i),     VIDEO_HEIGHT*0.5,   -VIDEO_HEIGHT*2,    VIDEO_HEIGHT*2));
+        undistortcontrol->add(centerx->set("CENTER_X_"+ofToString(i),   VIDEO_WIDTH*0.5,    -VIDEO_WIDTH*2,     VIDEO_WIDTH*2));
+        undistortcontrol->add(centery->set("CENTER_Y_"+ofToString(i),   VIDEO_HEIGHT*0.5,   -VIDEO_HEIGHT*2,   VIDEO_HEIGHT*2));
         
         radialDistX.push_back(radialdistX);
         radialDistY.push_back(radialdistY);
@@ -196,12 +196,12 @@ void VideoGrabberManager::update()
     for(std::size_t i = 0; i < grabbers.size(); i++)
     {
         grabbers[i]->update();
-//        if(grabbers[i]->isFrameNew() && grabbers[i]->isConnected())
-//        {
-////            textures[i]->loadData(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight(),GL_RGB);
-//            cvImages[i]->setFromPixels(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight());
-//            cvImages[i]->undistort(radialDistX[i]->get(),  radialDistY[i]->get(),  tangentDistX[i]->get(),  tangentDistY[i]->get(),  focalX[i]->get(),  focalY[i]->get(),  centerX[i]->get(),  centerY[i]->get()) ;
-//        }
+        if(grabbers[i]->isFrameNew() && grabbers[i]->isConnected())
+        {
+//            textures[i]->loadData(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight(),GL_RGB);
+            cvImages[i]->setFromPixels(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight());
+            cvImages[i]->undistort(radialDistX[i]->get(),  radialDistY[i]->get(),  tangentDistX[i]->get(),  tangentDistY[i]->get(),  focalX[i]->get(),  focalY[i]->get(),  centerX[i]->get(),  centerY[i]->get()) ;
+        }
     }
 //    ofEnableNormalizedTexCoords();
     
@@ -224,7 +224,7 @@ void VideoGrabberManager::update()
 
             blendShader.setUniformTexture("tex0", grabbers[i]->getTextureReference(), 0);
         }
-        grabbers[i]->draw(ipCamX[i]->get(), ipCamY[i]->get(), ipCamW[i]->get(), ipCamH[i]->get());
+        cvImages[i]->draw(ipCamX[i]->get(), ipCamY[i]->get(), ipCamW[i]->get(), ipCamH[i]->get());
         if(enableShader.get())
         {
             blendShader.end();

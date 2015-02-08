@@ -40,6 +40,7 @@ public:
     ofParameter<bool>bUseApproximation ;
     ofParameter<bool>bBlur;
     ofParameter<bool>bSetBackground;
+        ofParameter<bool>bTrackDiff;
     
     ofxOscSender sender;
 

@@ -51,8 +51,13 @@ void ofApp::setup(){
     gui.setWhichColumn(0);
     for(int i = 0 ; i < videoManager.ipcamRectControls.size(); i++)
     {
-        gui.addDrawableRect("videos"+ofToString(i), videoManager.grabbers[i].get() , ofGetWidth()/4-(30), VIDEO_HEIGHT);
+
         gui.addGroup(*videoManager.undistortControls[i].get());
+    }
+     gui.setWhichColumn(1);
+    for (int i = 0 ; i < videoManager.ipcamRectControls.size(); i++){
+        gui.addDrawableRect("videos"+ofToString(i), videoManager.grabbers[i].get() , ofGetWidth()/4-(30), VIDEO_HEIGHT);
+        gui.addDrawableRect("cvimage"+ofToString(i), videoManager.cvImages[i].get() , ofGetWidth()/4-(30), VIDEO_HEIGHT);
     }
     
     gui.setWhichPanel(2);
@@ -79,7 +84,7 @@ void ofApp::setup(){
     
     gui.addDrawableRect("cvImage", &cvtracker.cvImage, VIDEO_WIDTH, VIDEO_HEIGHT);
     gui.addDrawableRect("cvGrayImage", &cvtracker.grayImage, VIDEO_WIDTH, VIDEO_HEIGHT);
-    gui.addDrawableRect("cvGrayImage", &cvtracker.grayDiff , VIDEO_WIDTH, VIDEO_HEIGHT);
+    gui.addDrawableRect("grayDiff", &cvtracker.grayDiff , VIDEO_WIDTH, VIDEO_HEIGHT);
     gui.addDrawableRect("contourFinder", &cvtracker.contourFinder , VIDEO_WIDTH, VIDEO_HEIGHT);
     //SETTINGS AND EVENTS
     
@@ -179,6 +184,12 @@ void ofApp::keyPressed(int key){
             ofSetLogLevel(OF_LOG_VERBOSE);
             gui.show();
         }
+    }
+    switch(key)
+    {
+        case  's':
+            gui.saveSettings();
+            break;
     }
 }
 

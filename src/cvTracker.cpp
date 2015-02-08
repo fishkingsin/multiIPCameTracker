@@ -23,13 +23,13 @@ void cvTracker::setup(int width, int height)
     trackerControl.setName("CV opticalFlow Tracking");
     trackerControl.add( bUseFlow.set("USE_FLOW",true));
     trackerControl.add( threshold.set("threashold",80,1,255));
-    trackerControl.add( minArea.set("minArea",20,20,width*height));
+    trackerControl.add( minArea.set("minArea",20,20,width*height*0.5));
     trackerControl.add( maxArea.set("maxArea",80,20,width*height));
     trackerControl.add( nConsidered.set("nConsidered",10,1,100));
     trackerControl.add( bFindHoles.set("bFindHoles",true));
     trackerControl.add( bUseApproximation.set("bUseApproximation",true));
     trackerControl.add( bBlur.set("bBlur",true));
-    
+    trackerControl.add(     bTrackDiff.set("trackDiff",true));
     sender.setup(HOST, PORT);
 }
 void cvTracker::update(ofFbo &infbo, int width, int height)
@@ -82,14 +82,14 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
     
     // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
     // also, find holes is set to true so we will get interior contours as well....
-    contourFinder.findContours(grayImage,
+    contourFinder.findContours(grayDiff,
                                minArea.get(),
                                maxArea.get(),
                                nConsidered.get(),
                                bFindHoles.get(),
                                bUseApproximation.get());	// find holes
     
-    grayBg = grayImage;
+    if(bTrackDiff)grayBg = grayImage;
     //    ofxOscBundle bundle;
     //    ofxOscMessage m;
     if(contourFinder.nBlobs>0)
@@ -110,12 +110,12 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
             //            m_hue.setAddress("/hue");
             //            m_hue.addIntArg(c.getHue());
             //            bundle.addMessage(m_hue);
-            ofParameter<ofColor>color;
+//            ofParameter<ofColor>color;
             ofParameter<ofVec2f>v2;
-            pGroup.add(v2.set("contour", ofVec2f(contourFinder.blobs[i].boundingRect.getCenter().x/VIDEO_WIDTH , contourFinder.blobs[i].boundingRect.getCenter().y / VIDEO_HEIGHT)));
-            ofColor c = incoming_pixels.getColor(contourFinder.blobs[i].boundingRect.getCenter().x, contourFinder.blobs[i].boundingRect.getCenter().x);
-            ofLogVerbose ("color") << c;
-            pGroup.add(color.set("color",c) );
+            pGroup.add(v2.set("contour", ofVec2f(contourFinder.blobs[i].boundingRect.getCenter().x/contourFinder.getWidth() , contourFinder.blobs[i].boundingRect.getCenter().y / contourFinder.getHeight())));
+//            ofColor c = incoming_pixels.getColor(contourFinder.blobs[i].boundingRect.getCenter().x, contourFinder.blobs[i].boundingRect.getCenter().x);
+//            ofLogVerbose ("color") << c;
+//            pGroup.add(color.set("color",c) );
             
         }
         //         sender.sendBundle(bundle);

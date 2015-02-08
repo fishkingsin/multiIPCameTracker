@@ -96,6 +96,7 @@ public:
     
     ofParameter<bool>enableShader;
     ofxAutoReloadedShader blendShader;
+        std::vector< ofPtr<ofxCvColorImage > > cvImages;
     
 //    std::vector< ofPtr<ofTexture > > textures;
     
