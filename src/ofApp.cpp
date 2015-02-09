@@ -34,6 +34,8 @@ void ofApp::setup(){
     vars.add( appFrameRate.set("frame rate", 60.0) );
     vars.add( elapsedTime.set("elapsed time", 0.0) );
     gui.addToggle(toggleMinimize.set("MINIMIZE",false));
+    gui.addToggle(toggleDrawQuad.set("DRAW_QUAD",false));
+    toggleDrawQuad.addListener(&videoManager, &VideoGrabberManager::enableDrawQuad);
     gui.addToggle( bDebug.set("DEBUG" , true));
     toggleMinimize.addListener(this, &ofApp::enableMinize);
     gui.addVariableLister(vars);
@@ -43,7 +45,7 @@ void ofApp::setup(){
     gui.enableIgnoreLayoutFlag();
     gui.addLogger("events logger", &logger, 410, 300);
     gui.disableIgnoreLayoutFlag();
-
+    
     bDebug.addListener(this, &ofApp::enableDebug);
     //--------- PANEL 2
     gui.setWhichPanel(1);
@@ -51,10 +53,10 @@ void ofApp::setup(){
     gui.setWhichColumn(0);
     for(int i = 0 ; i < videoManager.ipcamRectControls.size(); i++)
     {
-
+        
         gui.addGroup(*videoManager.undistortControls[i].get());
     }
-     gui.setWhichColumn(1);
+    gui.setWhichColumn(1);
     for (int i = 0 ; i < videoManager.ipcamRectControls.size(); i++){
         gui.addDrawableRect("videos"+ofToString(i), videoManager.grabbers[i].get() , ofGetWidth()/4-(30), VIDEO_HEIGHT);
         gui.addDrawableRect("cvimage"+ofToString(i), videoManager.cvImages[i].get() , ofGetWidth()/4-(30), VIDEO_HEIGHT);
@@ -162,8 +164,10 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-    videoManager.drawQuadGui();
+    if(toggleDrawQuad)
+    {
+        videoManager.drawQuadGui();
+    }
     //    cvtracker.opticalFlow.draw();
     //    ofPushStyle();
     gui.draw();

@@ -11,11 +11,11 @@
 
 void VideoGrabberManager::setup()
 {
-//    ofEnableNormalizedTexCoords();
-//    ofDisableArbTex();
-//    blendShader.load("shaders/SmoothEdgeBlend");
+    //    ofEnableNormalizedTexCoords();
+    //    ofDisableArbTex();
+    //    blendShader.load("shaders/SmoothEdgeBlend");
     nextCamera = 0;
-        blendShader.load("shaders/simpleBlend");
+    blendShader.load("shaders/simpleBlend");
     loadCameras();
     // initialize connection
     for(int i = 0; i < ipcams.size(); i++)
@@ -68,9 +68,9 @@ void VideoGrabberManager::setup()
         outputImage->setUseTexture(true);
         outputImages.push_back(outputImage);
         
-//        image->allocate(VIDEO_WIDTH , VIDEO_HEIGHT, GL_RGB);
+        //        image->allocate(VIDEO_WIDTH , VIDEO_HEIGHT, GL_RGB);
         //        textures->setUseTexture(true);
-//        textures.push_back(image);
+        //        textures.push_back(image);
         
         
         ofPtr<ofParameterGroup> shaderControl = ofPtr<ofParameterGroup>(new ofParameterGroup);
@@ -105,7 +105,7 @@ void VideoGrabberManager::setup()
         ofPtr<ofParameter<float> >  focaly = ofPtr<ofParameter<float> > (new ofParameter<float>);
         ofPtr<ofParameter<float> >  centerx = ofPtr<ofParameter<float> > (new ofParameter<float>);
         ofPtr<ofParameter<float> >  centery = ofPtr<ofParameter<float> > (new ofParameter<float>);
-
+        
         
         
         undistortcontrol->add(radialdistX->set("RADIALDIST_X_"+ofToString(i),0,-1,1));
@@ -131,7 +131,7 @@ void VideoGrabberManager::setup()
         setupQuadGui(i,VIDEO_WIDTH, VIDEO_HEIGHT);
     }
     fbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT,GL_RGB);
-
+    
 }
 
 //------------------------------------------------------------------------------
@@ -207,26 +207,26 @@ void VideoGrabberManager::update()
         grabbers[i]->update();
         if(grabbers[i]->isFrameNew() && grabbers[i]->isConnected())
         {
-//            textures[i]->loadData(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight(),GL_RGB);
+            //            textures[i]->loadData(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight(),GL_RGB);
             cvImages[i]->setFromPixels(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight());
             cvImages[i]->undistort(radialDistX[i]->get(),  radialDistY[i]->get(),  tangentDistX[i]->get(),  tangentDistY[i]->get(),  focalX[i]->get(),  focalY[i]->get(),  centerX[i]->get(),  centerY[i]->get()) ;
-                        vector <ofPoint> quadWarpScaled;
+            vector <ofPoint> quadWarpScaled;
             ofPoint * scaledPoints = quadGuis[i]->getScaledQuadPoints(cameraWidth,cameraHeight);
             for (int i=0; i<4; i++){
                 quadWarpScaled.push_back( scaledPoints[i]);
             }
-
-             getQuadSubImage(cvImages[i].get(), outputImages[i].get(), quadWarpScaled, OF_IMAGE_COLOR);
+            
+            getQuadSubImage(cvImages[i].get(), outputImages[i].get(), quadWarpScaled, OF_IMAGE_COLOR);
         }
     }
-//    ofEnableNormalizedTexCoords();
+    //    ofEnableNormalizedTexCoords();
     
     fbo.begin();
     ofClear(0, 0, 0);
     ofSetColor(ofColor::white);
     for(std::size_t i = 0; i < grabbers.size(); i++)
     {
-
+        
         if(enableShader.get())
         {
             blendShader.begin();
@@ -237,7 +237,7 @@ void VideoGrabberManager::update()
             blendShader.setUniform1f("sizeL", sizeLs[i]->get());
             blendShader.setUniform1f("sizeR", sizeRs[i]->get());
             blendShader.setUniform1f("BarrelPower", BarrelPowers[i]->get());
-
+            
             blendShader.setUniformTexture("tex0", grabbers[i]->getTextureReference(), 0);
         }
         outputImages[i]->draw(ipCamX[i]->get(), ipCamY[i]->get(), ipCamW[i]->get(), ipCamH[i]->get());
@@ -253,9 +253,9 @@ void VideoGrabberManager::update()
 void VideoGrabberManager::draw(float x , float y, float w , float h)
 {
     ofSetColor(ofColor::white);
-
+    
     fbo.draw(x,y,w,h);
-
+    
 }
 
 //BR: Added some messiness here to setup, draw, and update the gui quad...
@@ -279,18 +279,18 @@ void VideoGrabberManager::setupQuadGui (int i, int _cameraWidth, int _cameraHeig
     quadGuis.back()->setQuadPoints(quadSrc);
     
     // give the gui quad a default setting
-//    settings.quadWarpOriginal[0].set(0, 0);
-//    settings.quadWarpOriginal[1].set(cameraWidth, 0);
-//    settings.quadWarpOriginal[2].set(cameraWidth, cameraHeight);
-//    settings.quadWarpOriginal[3].set(0, cameraHeight);
+    //    settings.quadWarpOriginal[0].set(0, 0);
+    //    settings.quadWarpOriginal[1].set(cameraWidth, 0);
+    //    settings.quadWarpOriginal[2].set(cameraWidth, cameraHeight);
+    //    settings.quadWarpOriginal[3].set(0, cameraHeight);
     
     //BR TO DO: add this into the normal settings file
     quadGuis.back()->width = cameraWidth;
     quadGuis.back()->height = cameraHeight;
     quadGuis.back()->disableAppEvents();
-//    quadGuiSetup = true;
-
-//    quadGui.enableAllEvents();
+    //    quadGuiSetup = true;
+    
+    //    quadGui.enableAllEvents();
     quadGuis.back()->bCameraView = true;
     quadGuis.back()->enableAllEvents();
     quadGuis.back()->readFromFile("QUAD_Settings.xml");
@@ -371,4 +371,18 @@ void VideoGrabberManager::getQuadSubImage(ofxCvColorImage* inputImage, ofxCvColo
         }
     }
     outputImage->setFromPixels(outpix, outW, outH);
+}
+void VideoGrabberManager::enableDrawQuad(bool &b)
+{
+    for(int i = 0 ; i< ipcams.size() ;i++)
+    {
+        if(b)
+        {
+            quadGuis[i]->enableAllEvents();
+        }
+        else{
+            quadGuis[i]->disableAllEvents();
+        }
+    }
+    
 }

@@ -35,6 +35,7 @@ public:
     VideoGrabberManager videoManager;
     cvTracker cvtracker;
 	ofParameter<bool>toggleMinimize;
+    	ofParameter<bool>toggleDrawQuad;
     
     void enableMinize(bool &b);
     

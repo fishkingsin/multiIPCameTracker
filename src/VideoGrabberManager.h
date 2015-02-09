@@ -142,6 +142,7 @@ public:
     int cameraWidth;
     int cameraHeight;
     void saveQuad();
+    void enableDrawQuad(bool &b);
 };
 
 #endif /* defined(__wlbankinteractive__VideoGrabberManager__) */
