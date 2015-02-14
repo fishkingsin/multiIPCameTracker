@@ -158,7 +158,7 @@
     <val_0>1</val_0>
 </DEBUG>
 <MINIMIZE>
-    <val_0>0</val_0>
+    <val_0>1</val_0>
 </MINIMIZE>
 <UNDISTORT_CONTROL_0>
     <RADIALDIST_X_0>
