@@ -127,13 +127,13 @@
 </ENABLE_SHADER>
 <CV_opticalFlow_Tracking>
     <threashold>
-        <val_0>70</val_0>
+        <val_0>75</val_0>
     </threashold>
     <minArea>
         <val_0>20</val_0>
     </minArea>
     <maxArea>
-        <val_0>15647</val_0>
+        <val_0>36697</val_0>
     </maxArea>
     <nConsidered>
         <val_0>18</val_0>
@@ -213,5 +213,5 @@
     </CENTER_Y_1>
 </UNDISTORT_CONTROL_1>
 <DRAW_QUAD>
-    <val_0>1</val_0>
+    <val_0>0</val_0>
 </DRAW_QUAD>
