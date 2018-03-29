@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxControlPanel.h"
+#include "simpleLogger.h"
 #include "VideoGrabberManager.h"
 #include "cvTracker.h"
 class ofApp : public ofBaseApp{

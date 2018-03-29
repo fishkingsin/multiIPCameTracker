@@ -134,6 +134,9 @@ void VideoGrabberManager::setup()
     
 }
 
+VideoGrabberManager::~VideoGrabberManager(){
+    
+}
 //------------------------------------------------------------------------------
 
 IPCameraDef& VideoGrabberManager::getNextCamera()
@@ -208,7 +211,7 @@ void VideoGrabberManager::update()
         if(grabbers[i]->isFrameNew() && grabbers[i]->isConnected())
         {
             //            textures[i]->loadData(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight(),GL_RGB);
-            cvImages[i]->setFromPixels(grabbers[i]->getPixels(), grabbers[i]->getWidth(), grabbers[i]->getHeight());
+            cvImages[i]->setFromPixels(grabbers[i]->getPixels());
             cvImages[i]->undistort(radialDistX[i]->get(),  radialDistY[i]->get(),  tangentDistX[i]->get(),  tangentDistY[i]->get(),  focalX[i]->get(),  focalY[i]->get(),  centerX[i]->get(),  centerY[i]->get()) ;
             vector <ofPoint> quadWarpScaled;
             ofPoint * scaledPoints = quadGuis[i]->getScaledQuadPoints(cameraWidth,cameraHeight);
@@ -238,7 +241,7 @@ void VideoGrabberManager::update()
             blendShader.setUniform1f("sizeR", sizeRs[i]->get());
             blendShader.setUniform1f("BarrelPower", BarrelPowers[i]->get());
             
-            blendShader.setUniformTexture("tex0", grabbers[i]->getTextureReference(), 0);
+            blendShader.setUniformTexture("tex0", grabbers[i]->getTexture(), 0);
         }
         outputImages[i]->draw(ipCamX[i]->get(), ipCamY[i]->get(), ipCamW[i]->get(), ipCamH[i]->get());
         if(enableShader.get())
@@ -250,7 +253,7 @@ void VideoGrabberManager::update()
     fbo.end();
     
 }
-void VideoGrabberManager::draw(float x , float y, float w , float h)
+void VideoGrabberManager::draw(float x , float y, float w , float h) const
 {
     ofSetColor(ofColor::white);
     
@@ -329,8 +332,8 @@ void VideoGrabberManager::getQuadSubImage(ofxCvColorImage* inputImage, ofxCvColo
     
     static unsigned char * inpix;
     static unsigned char * outpix;
-    inpix   = inputImage->getPixels();
-    outpix  = outputImage->getPixels();
+    inpix   = inputImage->getPixels().getData();
+    outpix  = outputImage->getPixels().getData();
     
     int inW, inH, outW, outH;
     inW = inputImage->width;

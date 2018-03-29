@@ -57,35 +57,35 @@ private:
     std::string _password;
 };
 using ofx::Video::IPVideoGrabber;
-using ofx::Video::SharedIPVideoGrabber;
+//using ofx::Video::SharedIPVideoGrabber;
 
 class VideoGrabberManager : public ofBaseDraws
 {
 public:
     void setup();
     void update();
-    
+    ~VideoGrabberManager();
     //baseDraw
-    void draw(float x, float y)
+    void draw(float x, float y) const
     {
         draw(x,y,VIDEO_WIDTH , VIDEO_HEIGHT);
     }
-    void draw(float x, float y, float w, float h);
-    void draw(const ofPoint & point) {
+    void draw(float x, float y, float w, float h)  const;
+    void draw(const ofPoint & point)  const {
         draw(point.x, point.y);
     }
-    void draw(const ofRectangle & rect) {
+    void draw(const ofRectangle & rect)  const{
         draw(rect.x, rect.y, rect.width, rect.height);
     }
-    void draw(const ofPoint & point, float w, float h) {
+    void draw(const ofPoint & point, float w, float h)  const{
         draw(point.x, point.y, w, h);
     }
     
-    float getHeight()
+    float getHeight() const
     {
         return fbo.getHeight();
     }
-    float getWidth()
+    float getWidth() const
     {
         return fbo.getWidth();
     }

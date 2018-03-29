@@ -44,7 +44,8 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
     {
         try
         {
-            opticalFlow.update(incoming_pixels.getPixels() , incoming_pixels.getWidth(), incoming_pixels.getHeight() , OF_IMAGE_COLOR);
+//            opticalFlow.update(incoming_pixels.getPixels() , incoming_pixels.getWidth(), incoming_pixels.getHeight() , OF_IMAGE_COLOR);
+            opticalFlow.update(incoming_pixels);
         }
         catch(exception e)
         {
