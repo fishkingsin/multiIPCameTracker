@@ -11,7 +11,7 @@
 
 #include "ofMain.h"
 #include "Constants.h"
-#include "ofxOpenCV.h"
+#include "ofxOpenCv.h"
 #include "ofxOpticalFlowLK.h"
 #include "ofxOsc.h"
 #define HOST "localhost"

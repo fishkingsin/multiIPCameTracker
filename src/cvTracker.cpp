@@ -44,8 +44,8 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
     {
         try
         {
-//            opticalFlow.update(incoming_pixels.getPixels() , incoming_pixels.getWidth(), incoming_pixels.getHeight() , OF_IMAGE_COLOR);
-            opticalFlow.update(incoming_pixels);
+            opticalFlow.update(incoming_pixels.getData() , incoming_pixels.getWidth(), incoming_pixels.getHeight() , OF_IMAGE_COLOR);
+//            opticalFlow.update(incoming_pixels.getPixels());
         }
         catch(exception e)
         {
@@ -63,7 +63,7 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
         opticalFlow.draw(width,height,5,4);
         fbo.end();
         fbo.readToPixels(pixels);
-        cvImage.setFromPixels(pixels.getPixels(), width,height);
+        cvImage.setFromPixels(pixels);
         
         grayImage = cvImage;
     }
