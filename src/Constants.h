@@ -9,7 +9,7 @@
 #ifndef wlbankinteractive_Constants_h
 #define wlbankinteractive_Constants_h
 
-#define VIDEO_WIDTH 384
-#define VIDEO_HEIGHT 216    
+#define VIDEO_WIDTH 640
+#define VIDEO_HEIGHT 360    
 
 #endif

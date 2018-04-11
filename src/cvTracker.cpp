@@ -30,7 +30,14 @@ void cvTracker::setup(int width, int height)
     trackerControl.add( bUseApproximation.set("bUseApproximation",true));
     trackerControl.add( bBlur.set("bBlur",true));
     trackerControl.add(     bTrackDiff.set("trackDiff",true));
-    sender.setup(HOST, PORT);
+    fxXmlSettings XML;
+    
+    if(XML.loadFile("streams.xml"))
+    {
+        sender.setup(XML.getValue("host"), XML.getValue("port"));
+    }else{
+        sender.setup(HOST, PORT);
+    }
 }
 void cvTracker::update(ofFbo &infbo, int width, int height)
 {
@@ -101,7 +108,9 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
     {
         ofParameterGroup pGroup;
         pGroup.setName("cvtracker");
+        ofParameter<int> nBlobs;
         //        ofxOscBundle bundle;
+        pGroup.add(nBlobs.set("nBlobs",contourFinder.nBlobs));
         for (int i = 0; i < contourFinder.nBlobs; i++){
             //            ofxOscMessage m;
             //            m.setAddress("/contour");
@@ -116,8 +125,8 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
             //            m_hue.addIntArg(c.getHue());
             //            bundle.addMessage(m_hue);
 //            ofParameter<ofColor>color;
-            //ofParameter<ofVec2f>v2;
-            //pGroup.add(v2.set("contour", ofVec2f(contourFinder.blobs[i].boundingRect.getCenter().x/contourFinder.getWidth() , contourFinder.blobs[i].boundingRect.getCenter().y / contourFinder.getHeight())));
+            ofParameter<ofVec2f>v2;
+            pGroup.add(v2.set("contour", ofVec2f(contourFinder.blobs[i].boundingRect.getCenter().x/contourFinder.getWidth() , contourFinder.blobs[i].boundingRect.getCenter().y / contourFinder.getHeight())));
 //            ofColor c = incoming_pixels.getColor(contourFinder.blobs[i].boundingRect.getCenter().x, contourFinder.blobs[i].boundingRect.getCenter().x);
 //            ofLogVerbose ("color") << c;
 //            pGroup.add(color.set("color",c) );

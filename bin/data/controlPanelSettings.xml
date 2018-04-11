@@ -1,29 +1,29 @@
 <CAM_RECT_0>
     <CAM_RECT_X_0>
-        <val_0>231.877</val_0>
+        <val_0>-4.92303</val_0>
     </CAM_RECT_X_0>
     <CAM_RECT_Y_0>
         <val_0>1.66154</val_0>
     </CAM_RECT_Y_0>
     <CAM_RECT_W_0>
-        <val_0>-233.354</val_0>
+        <val_0>320</val_0>
     </CAM_RECT_W_0>
     <CAM_RECT_H_0>
-        <val_0>215.169</val_0>
+        <val_0>371.077</val_0>
     </CAM_RECT_H_0>
 </CAM_RECT_0>
 <CAM_RECT_1>
     <CAM_RECT_X_1>
-        <val_0>160.985</val_0>
+        <val_0>305.231</val_0>
     </CAM_RECT_X_1>
     <CAM_RECT_Y_1>
         <val_0>0</val_0>
     </CAM_RECT_Y_1>
     <CAM_RECT_W_1>
-        <val_0>223.015</val_0>
+        <val_0>342.154</val_0>
     </CAM_RECT_W_1>
     <CAM_RECT_H_1>
-        <val_0>220.154</val_0>
+        <val_0>358.615</val_0>
     </CAM_RECT_H_1>
 </CAM_RECT_1>
 <CAM_RECT_2>
@@ -213,5 +213,5 @@
     </CENTER_Y_1>
 </UNDISTORT_CONTROL_1>
 <DRAW_QUAD>
-    <val_0>1</val_0>
+    <val_0>0</val_0>
 </DRAW_QUAD>

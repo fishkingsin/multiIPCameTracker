@@ -35,3 +35,14 @@ bin/multiIPCameTrackerDebug.app
 *.exp
 *.sdf
 *.opensdf
+._.DS_Store
+._addons.make
+._multiIPCameTracker.xcodeproj
+bin/._.DS_Store
+bin/data/._.DS_Store
+src/._cvTracker.h
+src/._Constants.h
+src/._main.cpp
+src/._ofApp.cpp
+multiIPCameTracker.xcodeproj/._project.xcworkspace
+multiIPCameTracker.xcodeproj/project.xcworkspace/xcuserdata/james.xcuserdatad/UserInterfaceState.xcuserstate
