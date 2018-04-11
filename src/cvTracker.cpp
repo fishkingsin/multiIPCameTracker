@@ -6,6 +6,7 @@
 //
 //
 
+#include "ofxXmlSettings.h"
 #include "cvTracker.h"
 void cvTracker::setup(int width, int height)
 {
@@ -30,11 +31,10 @@ void cvTracker::setup(int width, int height)
     trackerControl.add( bUseApproximation.set("bUseApproximation",true));
     trackerControl.add( bBlur.set("bBlur",true));
     trackerControl.add(     bTrackDiff.set("trackDiff",true));
-    fxXmlSettings XML;
+    ofxXmlSettings XML;
     
-    if(XML.loadFile("streams.xml"))
-    {
-        sender.setup(XML.getValue("host"), XML.getValue("port"));
+    if(XML.loadFile("streams.xml")){
+        sender.setup(XML.getValue("host", HOST), XML.getValue("port", PORT));
     }else{
         sender.setup(HOST, PORT);
     }
