@@ -1,6 +1,6 @@
 <streams>
-	<stream url="http://webcam.st-malo.com/axis-cgi/mjpg/video.cgi?resolution=320x240"/>
-	<stream url="http://194.103.218.15/axis-cgi/mjpg/video.cgi?resolution=320x240"/>
+	<stream url="http://10.0.1.23/snapshot.cgi"/>
+	<stream url="http://10.0.1.25/snapshot.cgi"/>
 	<!-- <stream url="http://192.168.1.124/video.mjpg"/> -->
 	<!-- <stream url="http://192.168.1.121/video.mjpg"/> -->
 <!-- 	<stream url="http://10.0.1.9:8081"/>
