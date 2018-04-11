@@ -197,7 +197,7 @@ void VideoGrabberManager::loadCameras()
     {
         ofLog(OF_LOG_ERROR, "Unable to load streams.xml.");
     }
-    
+
     ofLog(OF_LOG_NOTICE, "-----------Loading Streams Complete----------");
     
     nextCamera = 0;//ipcams.size();

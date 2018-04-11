@@ -30,10 +30,10 @@ void cvTracker::setup(int width, int height)
     trackerControl.add( bFindHoles.set("bFindHoles",true));
     trackerControl.add( bUseApproximation.set("bUseApproximation",true));
     trackerControl.add( bBlur.set("bBlur",true));
-    trackerControl.add(     bTrackDiff.set("trackDiff",true));
+    trackerControl.add( bTrackDiff.set("trackDiff",true));
     ofxXmlSettings XML;
     
-    if(XML.loadFile("streams.xml")){
+    if(XML.loadFile("settings.xml")){
         sender.setup(XML.getValue("host", HOST), XML.getValue("port", PORT));
     }else{
         sender.setup(HOST, PORT);
@@ -51,7 +51,7 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
     {
         try
         {
-            opticalFlow.update(incoming_pixels.getData() , incoming_pixels.getWidth(), incoming_pixels.getHeight() , OF_IMAGE_COLOR);
+//            opticalFlow.update(incoming_pixels.getData() , incoming_pixels.getWidth(), incoming_pixels.getHeight() , OF_IMAGE_COLOR);
 //            opticalFlow.update(incoming_pixels.getPixels());
         }
         catch(exception e)

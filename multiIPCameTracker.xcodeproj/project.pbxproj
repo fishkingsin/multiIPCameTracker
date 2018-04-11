@@ -1313,14 +1313,14 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				B304D05DA43149641F8DAE21 /* Constants.h */,
+				D5510C9E69723F6F15C3B4E6 /* cvTracker.cpp */,
+				CEFBE04BC3CDEF01136E4E7D /* cvTracker.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				D5510C9E69723F6F15C3B4E6 /* cvTracker.cpp */,
-				CEFBE04BC3CDEF01136E4E7D /* cvTracker.h */,
-				E8444E15362784547855E729 /* VideoGrabberManager.h */,
-				B304D05DA43149641F8DAE21 /* Constants.h */,
 				4FE2D2B6158571771DEC7822 /* VideoGrabberManager.cpp */,
+				E8444E15362784547855E729 /* VideoGrabberManager.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
