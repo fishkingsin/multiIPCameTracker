@@ -303,7 +303,7 @@ void VideoGrabberManager::drawQuadGui()
 {
     for(int i = 0 ; i< ipcams.size() ;i++)
     {
-        drawQuadGui(i,i*VIDEO_WIDTH,0,VIDEO_WIDTH,VIDEO_HEIGHT);
+        drawQuadGui(i,(i%2)*VIDEO_WIDTH,(i/2)*VIDEO_HEIGHT,VIDEO_WIDTH,VIDEO_HEIGHT);
     }
 }
 void VideoGrabberManager::drawQuadGui(int i){
