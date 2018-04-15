@@ -58,8 +58,8 @@ void ofApp::setup(){
     }
     gui.setWhichColumn(1);
     for (int i = 0 ; i < videoManager.ipcamRectControls.size(); i++){
-        gui.addDrawableRect("videos"+ofToString(i), videoManager.grabbers[i].get() , ofGetWidth()/4-(30), VIDEO_HEIGHT);
-        gui.addDrawableRect("cvimage"+ofToString(i), videoManager.cvImages[i].get() , ofGetWidth()/4-(30), VIDEO_HEIGHT);
+        gui.addDrawableRect("videos"+ofToString(i), videoManager.grabbers[i].get(), DRAWABLE_WIDTH, DRAWABLE_HEIGHT);
+        gui.addDrawableRect("cvimage"+ofToString(i), videoManager.cvImages[i].get(), DRAWABLE_WIDTH, DRAWABLE_HEIGHT);
     }
     
     gui.setWhichPanel(2);
@@ -75,19 +75,19 @@ void ofApp::setup(){
         gui.addGroup( *videoManager.shaderControls[i].get() );
     }
     gui.setWhichColumn(1);
-    gui.addDrawableRect("fbo", &videoManager, VIDEO_WIDTH, VIDEO_HEIGHT);
+    gui.addDrawableRect("fbo", &videoManager, DRAWABLE_WIDTH, DRAWABLE_HEIGHT);
     
     
     gui.setWhichPanel(3);
     gui.setWhichColumn(0);
     gui.addGroup(cvtracker.trackerControl);
     
-    gui.addDrawableRect("fbo", &cvtracker.fbo, VIDEO_WIDTH, VIDEO_HEIGHT);
+    gui.addDrawableRect("fbo", &cvtracker.fbo, DRAWABLE_WIDTH, DRAWABLE_HEIGHT);
     
-    gui.addDrawableRect("cvImage", &cvtracker.cvImage, VIDEO_WIDTH, VIDEO_HEIGHT);
-    gui.addDrawableRect("cvGrayImage", &cvtracker.grayImage, VIDEO_WIDTH, VIDEO_HEIGHT);
-    gui.addDrawableRect("grayDiff", &cvtracker.grayDiff , VIDEO_WIDTH, VIDEO_HEIGHT);
-    gui.addDrawableRect("contourFinder", &cvtracker.contourFinder , VIDEO_WIDTH, VIDEO_HEIGHT);
+    gui.addDrawableRect("cvImage", &cvtracker.cvImage, DRAWABLE_WIDTH, DRAWABLE_HEIGHT);
+    gui.addDrawableRect("cvGrayImage", &cvtracker.grayImage, DRAWABLE_WIDTH, DRAWABLE_HEIGHT);
+    gui.addDrawableRect("grayDiff", &cvtracker.grayDiff , DRAWABLE_WIDTH, DRAWABLE_HEIGHT);
+    gui.addDrawableRect("contourFinder", &cvtracker.contourFinder , DRAWABLE_WIDTH, DRAWABLE_HEIGHT);
     //SETTINGS AND EVENTS
     
     //load from xml!

@@ -25,8 +25,8 @@ void cvTracker::setup(int width, int height)
     trackerControl.add( bUseFlow.set("USE_FLOW",true));
     trackerControl.add( threshold.set("threashold",80,1,255));
     trackerControl.add( minArea.set("minArea",20,20,width*height*0.5));
-    trackerControl.add( maxArea.set("maxArea",80,20,width*height));
-    trackerControl.add( nConsidered.set("nConsidered",10,1,100));
+    trackerControl.add( maxArea.set("maxArea",80,20,width*height*2));
+    trackerControl.add( nConsidered.set("nConsidered",300,1,500));
     trackerControl.add( bFindHoles.set("bFindHoles",true));
     trackerControl.add( bUseApproximation.set("bUseApproximation",true));
     trackerControl.add( bBlur.set("bBlur",true));
@@ -63,7 +63,7 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
         ofPushStyle();
         ofSetColor(0);
         ofFill();
-        ofRect(0, 0, width,height);
+        ofDrawRectangle(0, 0, width,height);
         ofPopStyle();
         ofSetColor(255);
         //    infbo.draw(0,0,width,height);
@@ -76,7 +76,7 @@ void cvTracker::update(ofFbo &infbo, int width, int height)
     }
     else{
         grayBg = grayImage;
-        cvImage.setFromPixels(incoming_pixels.getPixels(), width,height);
+        cvImage.setFromPixels(incoming_pixels.getData(), width,height);
         grayImage = cvImage;
     }
     if(bBlur)grayImage.blur();
