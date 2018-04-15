@@ -1,6 +1,7 @@
 <streams>
-	<stream url="http://10.0.1.23/snapshot.cgi"/>
-	<stream url="http://10.0.1.25/snapshot.cgi"/>
+	<stream url="http://10.0.2.3/snapshot.cgi"/>
+	<stream url="http://10.0.2.4/snapshot.cgi"/>
+	<stream url="http://10.0.2.6:8080/?action=stream"/>
 	<!-- <stream url="http://192.168.1.124/video.mjpg"/> -->
 	<!-- <stream url="http://192.168.1.121/video.mjpg"/> -->
 <!-- 	<stream url="http://10.0.1.9:8081"/>
